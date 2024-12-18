@@ -21,7 +21,7 @@ console.log(projectId);
 
 export default defineConfig({
   name: "default",
-  title: "Stablo Template",
+  title: "Night Sun Stables",
   basePath: "/studio",
   projectId: projectId,
   dataset: dataset,

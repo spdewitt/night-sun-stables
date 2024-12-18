@@ -5,6 +5,7 @@ import { Menu, Transition, Disclosure } from "@headlessui/react";
 import Container from "@/components/container";
 import Link from "next/link";
 import Image from "next/image";
+import logo from "../public/img/logo.webp";
 import { urlForImage } from "@/lib/sanity/image";
 import cx from "clsx";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -21,30 +22,16 @@ export default function Navbar(props) {
       href: "/about"
     },
     {
-      label: "Contact",
-      href: "/contact"
+      label: "Competition",
+      href: "/competition"
+    },
+    {
+      label: "Events",
+      href: "/events"
     }
   ];
 
-  const rightmenu = [
-    {
-      label: "Archive",
-      href: "/archive"
-    },
-    {
-      label: "Pro Version",
-      href: "https://stablo-pro.web3templates.com/",
-      external: true,
-      badge: "new"
-    },
-    {
-      label: "Download",
-      href: "https://web3templates.com/templates/stablo-minimal-blog-website-template",
-      external: true
-    }
-  ];
-
-  const mobilemenu = [...leftmenu, ...rightmenu];
+  const mobilemenu = [...leftmenu];
 
   return (
     <Container>
@@ -52,132 +39,60 @@ export default function Navbar(props) {
         <Disclosure>
           {({ open }) => (
             <>
-              <div className="flex flex-wrap justify-between md:flex-nowrap md:gap-10">
-                <div className="order-1 hidden w-full flex-col items-center justify-start md:order-none md:flex md:w-auto md:flex-1 md:flex-row md:justify-end">
-                  {leftmenu.map((item, index) => (
-                    <Fragment key={`${item.label}${index}`}>
-                      {item.children && item.children.length > 0 ? (
-                        <DropdownMenu
-                          menu={item}
-                          key={`${item.label}${index}`}
-                          items={item.children}
-                        />
-                      ) : (
-                        <Link
-                          href={item.href}
-                          key={`${item.label}${index}`}
-                          className="px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400"
-                          target={item.external ? "_blank" : ""}
-                          rel={item.external ? "noopener" : ""}>
-                          {item.label}
-                        </Link>
-                      )}
-                    </Fragment>
-                  ))}
-                </div>
-                <div className="flex w-full items-center justify-between md:w-auto">
-                  <Link href="/" className="w-28 dark:hidden">
-                    {props.logo ? (
-                      <Image
-                        {...urlForImage(props.logo)}
-                        alt="Logo"
-                        priority={true}
-                        sizes="(max-width: 640px) 100vw, 200px"
-                      />
-                    ) : (
-                      <span className="block text-center">
-                        Stablo
-                      </span>
-                    )}
-                  </Link>
-                  <Link href="/" className="hidden w-28 dark:block">
-                    {props.logoalt ? (
-                      <Image
-                        {...urlForImage(props.logoalt)}
-                        alt="Logo"
-                        priority={true}
-                        sizes="(max-width: 640px) 100vw, 200px"
-                      />
-                    ) : (
-                      <span className="block text-center">
-                        Stablo
-                      </span>
-                    )}
-                  </Link>
-                  <Disclosure.Button
-                    aria-label="Toggle Menu"
-                    className="ml-auto rounded-md px-2 py-1 text-gray-500 focus:text-blue-500 focus:outline-none dark:text-gray-300 md:hidden ">
-                    <svg
-                      className="h-6 w-6 fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24">
-                      {open && (
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
-                        />
-                      )}
-                      {!open && (
-                        <path
-                          fillRule="evenodd"
-                          d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-                        />
-                      )}
-                    </svg>
-                  </Disclosure.Button>
-                </div>
+              <div className="flex items-center justify-between">
+                {/* Logo or Branding */}
+                <Link href="/">
+                  <Image
+                    src={logo}
+                    alt="Logo"
+                    width={50}
+                    height={50}
+                  />
+                </Link>
+                <div className="phoneNumber">(812) 499-3403</div>
+                {/* Mobile Toggle Button */}
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden">
+                  <span className="sr-only">Open main menu</span>
+                  {/* Icon for the button - a hamburger menu icon */}
+                  <svg
+                    className="h-6 w-6 text-gray-700"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    aria-hidden="true">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </Disclosure.Button>
 
-                <div className="order-2 hidden w-full flex-col items-center justify-start md:order-none md:flex md:w-auto md:flex-1 md:flex-row">
-                  {rightmenu.map((item, index) => (
-                    <Fragment key={`${item.label}${index}`}>
-                      {item.children && item.children.length > 0 ? (
-                        <DropdownMenu
-                          menu={item}
-                          key={`${item.label}${index}`}
-                          items={item.children}
-                        />
-                      ) : (
-                        <Link
-                          href={item.href}
-                          key={`${item.label}${index}`}
-                          className="px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400"
-                          target={item.external ? "_blank" : ""}
-                          rel={item.external ? "noopener" : ""}>
-                          <span> {item.label}</span>
-                          {item.badge && (
-                            <span className="ml-2 rounded bg-blue-100 px-2 py-0.5 text-xs font-semibold text-blue-600 dark:bg-cyan-200 dark:text-blue-800 ">
-                              {item.badge}
-                            </span>
-                          )}
-                        </Link>
-                      )}
-                    </Fragment>
+                {/* Desktop Menu */}
+                <div className="hidden md:flex md:items-center md:space-x-6">
+                  {leftmenu.map((item, index) => (
+                    <Link
+                      href={item.href}
+                      key={index}
+                      className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400">
+                      {item.label}
+                    </Link>
                   ))}
                 </div>
               </div>
-              <Disclosure.Panel>
-                <div className="order-2 -ml-4 mt-4 flex w-full flex-col items-center justify-start md:hidden">
+
+              {/* Mobile Menu Panel */}
+              <Disclosure.Panel className="md:hidden">
+                <div className="space-y-1 pb-3 pt-2">
                   {mobilemenu.map((item, index) => (
-                    <Fragment key={`${item.label}${index}`}>
-                      {item.children && item.children.length > 0 ? (
-                        <DropdownMenu
-                          menu={item}
-                          key={`${item.label}${index}`}
-                          items={item.children}
-                          mobile={true}
-                        />
-                      ) : (
-                        <Link
-                          href={item.href}
-                          key={`${item.label}${index}`}
-                          className="w-full px-5 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400"
-                          target={item.external ? "_blank" : ""}
-                          rel={item.external ? "noopener" : ""}>
-                          {item.label}
-                        </Link>
-                      )}
-                    </Fragment>
+                    <Link
+                      href={item.href}
+                      key={index}
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300">
+                      {item.label}
+                    </Link>
                   ))}
                 </div>
               </Disclosure.Panel>
