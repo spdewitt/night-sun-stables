@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import homeImage1 from "../public/img/homeImage1.webp";
 import homeImage2 from "../public/img/homeImage2.webp";
 import homeImage3 from "../public/img/homeImage3.webp";
+import homeImage4 from "../public/img/homeImage4.webp";
 
 function HeroSlider() {
   const settings = {
@@ -42,6 +43,13 @@ function HeroSlider() {
         <div>
           <Image
             src={homeImage3}
+            alt="Slide 3"
+            className="h-auto w-full object-cover"
+          />
+        </div>
+        <div>
+          <Image
+            src={homeImage4}
             alt="Slide 3"
             className="h-auto w-full object-cover"
           />

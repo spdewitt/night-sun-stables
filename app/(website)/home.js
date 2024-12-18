@@ -82,6 +82,8 @@ export default function HomePage({ data }) {
         />
       </section>
       <Container>
+        {" "}
+        <span className="text-xl font-bold">Night Sun Stables </span>
         {/* Hero Section */}
         <section className="mt-2 flex flex-col items-center text-center">
           <HeroSlider />
@@ -96,7 +98,6 @@ export default function HomePage({ data }) {
             {heroButtonText}
           </Link>
         </section>
-
         {/* Three Service Cards Section */}
         <section className="mt-2">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -127,7 +128,6 @@ export default function HomePage({ data }) {
               ))}
           </div>
         </section>
-
         {/* About Rich Bennett */}
         <section className="mx-auto mt-10 max-w-4xl rounded-lg bg-blue-50 p-6">
           <h3 className="mb-4 text-2xl font-semibold">
@@ -140,7 +140,6 @@ export default function HomePage({ data }) {
             {aboutQuote}
           </blockquote>
         </section>
-
         {/* Contact Form Section */}
         <div
           id="contact-form"
@@ -322,7 +321,6 @@ export default function HomePage({ data }) {
             </button>
           </form>
         </div>
-
         <section className="mt-10 rounded-lg bg-gray-50 p-6">
           <h2 className="mb-4 text-2xl font-semibold">
             {workDirectlyTitle}
@@ -331,7 +329,6 @@ export default function HomePage({ data }) {
             {workDirectlyDescription}
           </p>
         </section>
-
         <section className="mt-10 max-w-4xl p-6">
           <h2 className="mb-4 text-2xl font-semibold">
             {servingTitle}

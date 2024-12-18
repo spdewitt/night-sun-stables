@@ -22,19 +22,19 @@ export default function Navbar(props) {
       href: "/about"
     },
     {
-      label: "Competition",
-      href: "/competition"
+      label: "Birthday Parties",
+      href: "/events"
     },
     {
-      label: "Events",
-      href: "/events"
+      label: "Competitions",
+      href: "/competitions"
     }
   ];
 
   const mobilemenu = [...leftmenu];
 
   return (
-    <Container>
+    <Container className="bottom-border">
       <nav>
         <Disclosure>
           {({ open }) => (
