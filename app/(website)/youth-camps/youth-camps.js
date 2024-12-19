@@ -94,7 +94,7 @@ export default function YouthCamps({ data }) {
       {/* Sign Up / Contact Us Button */}
       <div className="mt-8 flex justify-center">
         <Link
-          href="/#contact-us"
+          href="/#contact-form"
           className="mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
           Sign Up for a Camp Today!
         </Link>

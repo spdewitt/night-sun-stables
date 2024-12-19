@@ -34,7 +34,7 @@ export default function aboutPage({ data }) {
       </div>
       <div className=" flex justify-center">
         <Link
-          href="/#contact-us"
+          href="/#contact-form"
           className="mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
           Reach Out and Meet the Team
         </Link>
