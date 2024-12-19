@@ -27,7 +27,19 @@ export default function Navbar(props) {
     },
     {
       label: "Competitions",
-      href: "/competitions"
+      href: "/competition"
+    },
+    {
+      label: "Lessons",
+      href: "/lessons"
+    },
+    {
+      label: "Services",
+      href: "/services"
+    },
+    {
+      label: "Camps",
+      href: "/youth-camps"
     }
   ];
 

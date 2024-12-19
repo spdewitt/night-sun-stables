@@ -9,6 +9,7 @@ import lessons from "./lessons";
 import services from "./services";
 import YouthCamps from "./youthCamps";
 import events from "./events";
+import competition from "./competition";
 
 export const schemaTypes = [
   post,
@@ -21,5 +22,6 @@ export const schemaTypes = [
   lessons,
   services,
   YouthCamps,
-  events
+  events,
+  competition
 ];
