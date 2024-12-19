@@ -26,6 +26,10 @@ export default function Navbar(props) {
       href: "/events"
     },
     {
+      label: "Camps",
+      href: "/youth-camps"
+    },
+    {
       label: "Competitions",
       href: "/competition"
     },
@@ -36,10 +40,6 @@ export default function Navbar(props) {
     {
       label: "Services",
       href: "/services"
-    },
-    {
-      label: "Camps",
-      href: "/youth-camps"
     }
   ];
 

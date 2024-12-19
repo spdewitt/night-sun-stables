@@ -5,7 +5,7 @@ export const metadata = {
   title:
     "Night Sun Stables | Horse Boarding, Lessons and Youth Camps",
   description:
-    "Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and events like birthdays & weddings.",
+    "Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays.",
   keywords: [
     "Evansville horse boarding",
     "Evansville horse lessons",

@@ -5,7 +5,7 @@ import Contact from "./services";
 export const metadata = {
   title: "Horse Boarding and Leasing in Evansville, IN",
   description:
-    "Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and events like birthdays & weddings.",
+    "Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays.",
   keywords: [
     "Evansville horse boarding",
     "Evansville horse services",
