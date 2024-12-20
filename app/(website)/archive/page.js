@@ -6,7 +6,22 @@ import Loading from "@/components/loading";
 export const dynamic = "force-dynamic";
 
 export const runtime = "edge";
-
+export const metadata = {
+  title: "Inside Night Sun Stables",
+  description:
+    "An inside look at Night Sun Stables, a horse boarding, training, leasing and lessons facility in Evansville, Indiana. We host Youth Camps and birthdays.",
+  keywords: [
+    "Evansville horse boarding",
+    "Evansville horse lessons",
+    "Evansville horse training",
+    "Evansville horse leasing",
+    "Evansville horse camps",
+    "Evansville horse events"
+  ],
+  alternates: {
+    canonical: "https://www.nightsunstables.com/archive"
+  }
+};
 export default async function ArchivePage({ searchParams }) {
   return (
     <>
