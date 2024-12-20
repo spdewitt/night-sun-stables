@@ -10,7 +10,7 @@ export default function HomePage({ data }) {
     heroDescription,
     heroButtonText,
     heroButtonLink,
-
+    additionalServices,
     services,
     aboutTitle,
     aboutDescription,
@@ -139,6 +139,35 @@ export default function HomePage({ data }) {
           <blockquote className="border-l-4 border-blue-600 pl-4 italic text-gray-700">
             {aboutQuote}
           </blockquote>
+        </section>
+        <section className="mt-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {additionalServices &&
+              additionalServices.map((service, i) => (
+                <Link
+                  href={service.link}
+                  key={i}
+                  className="group block">
+                  <div className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-lg">
+                    {service.imageUrl && (
+                      <Image
+                        src={service.imageUrl}
+                        alt={service.title}
+                        width={600}
+                        height={410}
+                        className="h-72 w-full object-cover transition-transform group-hover:scale-105"
+                      />
+                    )}
+                    <div className="p-4">
+                      <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                        {service.title}
+                      </h3>
+                      <p>{service.description}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+          </div>
         </section>
         {/* Contact Form Section */}
         <div

@@ -22,24 +22,8 @@ export default function Navbar(props) {
       href: "/about"
     },
     {
-      label: "Birthday Parties",
-      href: "/events"
-    },
-    {
-      label: "Camps",
-      href: "/youth-camps"
-    },
-    {
-      label: "Competitions",
-      href: "/competition"
-    },
-    {
-      label: "Lessons",
-      href: "/lessons"
-    },
-    {
-      label: "Services",
-      href: "/services"
+      label: "Whats New at the Stables?",
+      href: "/archive"
     }
   ];
 
@@ -53,15 +37,21 @@ export default function Navbar(props) {
             <>
               <div className="flex items-center justify-between">
                 {/* Logo or Branding */}
-                <Link href="/">
-                  <Image
-                    src={logo}
-                    alt="Logo"
-                    width={50}
-                    height={50}
-                  />
-                </Link>
-                <div className="phoneNumber">(812) 499-3403</div>
+                <div className="flex items-center">
+                  <Link href="/">
+                    <Image
+                      src={logo}
+                      alt="Logo"
+                      width={50}
+                      height={50}
+                    />
+                  </Link>
+                  <div className="ml-4 text-sm text-gray-600 dark:text-gray-400 md:block">
+                    (812) 499-3403
+                    <br />
+                    nightsunstables@hotmail.com
+                  </div>
+                </div>
                 {/* Mobile Toggle Button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden">
                   <span className="sr-only">Open main menu</span>

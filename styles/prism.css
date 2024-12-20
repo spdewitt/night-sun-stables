@@ -79,3 +79,12 @@
 html {
   scroll-behavior: smooth;
 }
+.phoneNumber {
+  font-size: 0.8em;
+}
+#contact-form {
+  background-color: rgb(59 130 246 / 0.1);
+}
+.centerImg {
+  margin: 0 auto;
+}

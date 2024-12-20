@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import Container from "@/components/container";
+import Image from "next/image";
+import facebook from "../public/img/facebook.png";
+import Link from "next/link";
 
 export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +14,21 @@ export default function Footer() {
 
   return (
     <Container className="relative mt-10 border-t border-gray-100 dark:border-gray-800">
+      <div className="text-center text-sm">
+        {" "}
+        <Link
+          href={"https://www.facebook.com/CarmenNHurley"}
+          target="_blank">
+          Like Us on Facebook{" "}
+          <Image
+            src={facebook}
+            alt={"Like us on Facebook"}
+            width={25}
+            height={25}
+            className="centerImg"
+          />{" "}
+        </Link>
+      </div>
       <div className="py-4 text-center text-sm">
         <div className="mb-2">
           © {new Date().getFullYear()}. All rights reserved.

@@ -38,8 +38,8 @@ export default function PostList({
               aspect === "landscape"
                 ? "aspect-video"
                 : aspect === "custom"
-                ? "aspect-[5/4]"
-                : "aspect-square"
+                  ? "aspect-[5/4]"
+                  : "aspect-square"
             )}
             href={`/post/${pathPrefix ? `${pathPrefix}/` : ""}${
               post.slug.current
@@ -76,8 +76,8 @@ export default function PostList({
                 fontSize === "large"
                   ? "text-2xl"
                   : minimal
-                  ? "text-3xl"
-                  : "text-lg",
+                    ? "text-3xl"
+                    : "text-lg",
                 fontWeight === "normal"
                   ? "line-clamp-2 font-medium  tracking-normal text-black"
                   : "font-semibold leading-snug tracking-tight",
@@ -114,24 +114,22 @@ export default function PostList({
             </div>
 
             <div className="mt-3 flex items-center space-x-3 text-gray-500 dark:text-gray-400">
-              <Link href={`/author/${post?.author?.slug?.current}`}>
-                <div className="flex items-center gap-3">
-                  <div className="relative h-5 w-5 flex-shrink-0">
-                    {post?.author?.image && (
-                      <Image
-                        src={AuthorimageProps.src}
-                        alt={post?.author?.name}
-                        className="rounded-full object-cover"
-                        fill
-                        sizes="20px"
-                      />
-                    )}
-                  </div>
-                  <span className="truncate text-sm">
-                    {post?.author?.name}
-                  </span>
+              <div className="flex items-center gap-3">
+                <div className="relative h-5 w-5 flex-shrink-0">
+                  {post?.author?.image && (
+                    <Image
+                      src={AuthorimageProps.src}
+                      alt={post?.author?.name}
+                      className="rounded-full object-cover"
+                      fill
+                      sizes="20px"
+                    />
+                  )}
                 </div>
-              </Link>
+                <span className="truncate text-sm">
+                  {post?.author?.name}
+                </span>
+              </div>
               <span className="text-xs text-gray-300 dark:text-gray-600">
                 &bull;
               </span>

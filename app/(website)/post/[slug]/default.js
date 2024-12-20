@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/container";
@@ -5,12 +6,14 @@ import { notFound } from "next/navigation";
 import { PortableText } from "@/lib/sanity/plugins/portabletext";
 import { urlForImage } from "@/lib/sanity/image";
 import { parseISO, format } from "date-fns";
+import { useState, useEffect } from "react";
 
 import CategoryLabel from "@/components/blog/category";
 import AuthorCard from "@/components/blog/authorCard";
 
 export default function Post(props) {
   const { loading, post } = props;
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const slug = post?.slug;
 
@@ -21,10 +24,34 @@ export default function Post(props) {
   const imageProps = post?.mainImage
     ? urlForImage(post?.mainImage)
     : null;
-
   const AuthorimageProps = post?.author?.image
     ? urlForImage(post.author.image)
     : null;
+
+  const handleImageClick = imgObj => {
+    const imageData = urlForImage(imgObj.image);
+    if (imageData) {
+      setSelectedImage({
+        src: imageData.src,
+        alt: imgObj.image?.alt || imgObj.title || "Image"
+      });
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedImage(null);
+  };
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleKeyDown = e => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -42,22 +69,18 @@ export default function Post(props) {
             <div className="flex items-center gap-3">
               <div className="relative h-10 w-10 flex-shrink-0">
                 {AuthorimageProps && (
-                  <Link href={`/author/${post.author.slug.current}`}>
-                    <Image
-                      src={AuthorimageProps.src}
-                      alt={post?.author?.name}
-                      className="rounded-full object-cover"
-                      fill
-                      sizes="40px"
-                    />
-                  </Link>
+                  <Image
+                    src={AuthorimageProps.src}
+                    alt={post?.author?.name}
+                    className="rounded-full object-cover"
+                    fill
+                    sizes="40px"
+                  />
                 )}
               </div>
               <div>
                 <p className="text-gray-800 dark:text-gray-400">
-                  <Link href={`/author/${post.author.slug.current}`}>
-                    {post.author.name}
-                  </Link>
+                  {post.author.name}
                 </p>
                 <div className="flex items-center space-x-2 text-sm">
                   <time
@@ -94,9 +117,49 @@ export default function Post(props) {
           <div className="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600">
             {post.body && <PortableText value={post.body} />}
           </div>
+
+          {/* Additional Images Grid */}
+          {post.images && post.images.length > 0 && (
+            <div className="my-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {post.images.map((imgObj, idx) => {
+                const imageData = urlForImage(imgObj.image);
+                return (
+                  <div
+                    key={idx}
+                    className="relative cursor-pointer overflow-hidden rounded-lg border border-gray-200 p-4 dark:border-gray-700"
+                    onClick={() => handleImageClick(imgObj)}>
+                    {imageData && (
+                      <div className="relative h-48 w-full">
+                        <Image
+                          src={imageData.src}
+                          alt={
+                            imgObj.image?.alt ||
+                            imgObj.title ||
+                            "Image"
+                          }
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+                    )}
+                    <h3 className="mt-2 text-lg font-semibold text-gray-800 dark:text-gray-200">
+                      {imgObj.title}
+                    </h3>
+                    {imgObj.description && (
+                      <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                        {imgObj.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           <div className="mb-7 mt-7 flex justify-center">
             <Link
-              href="/"
+              href="/archive"
               className="bg-brand-secondary/20 rounded-full px-5 py-2 text-sm text-blue-600 dark:text-blue-500 ">
               ← View all posts
             </Link>
@@ -104,6 +167,30 @@ export default function Post(props) {
           {post.author && <AuthorCard author={post.author} />}
         </article>
       </Container>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 p-4"
+          onClick={handleCloseModal}>
+          <div
+            className="relative"
+            style={{ width: "90vw", height: "90vh" }}
+            onClick={e => e.stopPropagation()}>
+            <Image
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              fill
+              className="object-contain"
+            />
+            <button
+              onClick={handleCloseModal}
+              className="absolute right-3 top-3 rounded-full bg-black bg-opacity-50 p-1.5 text-white hover:bg-opacity-70">
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
