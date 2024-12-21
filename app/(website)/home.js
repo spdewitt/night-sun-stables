@@ -49,8 +49,6 @@ export default function HomePage({ data }) {
     sameAs: ["https://www.facebook.com/CarmenNHurley"]
   };
 
-  // Replace with your actual Web3Forms access key
-
   const {
     register,
     handleSubmit,
@@ -60,6 +58,7 @@ export default function HomePage({ data }) {
     mode: "onTouched"
   });
 
+  // For displaying success/error states
   const [isSuccess, setIsSuccess] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -74,12 +73,20 @@ export default function HomePage({ data }) {
       const data = await response.json();
 
       if (data.success) {
-        // handle success
+        setIsSuccess(true);
+        setMessage(
+          data.message || "Thank you! Your message has been sent."
+        );
+        reset(); // Reset the form on success
       } else {
-        // handle error
+        setIsSuccess(false);
+        setMessage(data.message || "Oops! Something went wrong.");
       }
     } catch (err) {
-      // handle error
+      setIsSuccess(false);
+      setMessage(
+        "An unexpected error occurred. Please try again later."
+      );
     }
   };
 
@@ -103,6 +110,7 @@ export default function HomePage({ data }) {
         />
       </Head>
 
+      {/* Structured data for SEO */}
       <section>
         <script
           type="application/ld+json"
@@ -111,8 +119,10 @@ export default function HomePage({ data }) {
           }}
         />
       </section>
+
       <Container>
         <span className="text-xl font-bold">Night Sun Stables</span>
+
         {/* Hero Section */}
         <section className="mt-2 flex flex-col items-center text-center">
           <HeroSlider />
@@ -211,18 +221,6 @@ export default function HomePage({ data }) {
           </h3>
           <p className="mb-6 text-gray-700">{contactDescription}</p>
 
-          {isSuccess && (
-            <div className="mb-4 rounded bg-green-100 p-3 text-green-800">
-              {message || "Thank you! Your message has been sent."}
-            </div>
-          )}
-
-          {!isSuccess && message && (
-            <div className="mb-4 rounded bg-red-100 p-3 text-red-800">
-              {message || "Oops! Something went wrong."}
-            </div>
-          )}
-
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4">
@@ -245,6 +243,11 @@ export default function HomePage({ data }) {
                   maxLength: {
                     value: 50,
                     message: "Name cannot exceed 50 characters"
+                  },
+                  pattern: {
+                    value: /^[A-Za-zÀ-ÖØ-öø-ÿ'’ -]+$/,
+                    message:
+                      "Name can only contain letters, spaces, and basic punctuation"
                   }
                 })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
@@ -269,7 +272,8 @@ export default function HomePage({ data }) {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
+                    // A slightly more robust email pattern
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                     message: "Please enter a valid email address"
                   }
                 })}
@@ -294,17 +298,23 @@ export default function HomePage({ data }) {
                 id="phone"
                 {...register("phone", {
                   required: "Phone number is required",
-                  minLength: {
-                    value: 10,
-                    message: "Phone number must be at least 10 digits"
-                  },
-                  maxLength: {
-                    value: 15,
-                    message: "Phone number cannot exceed 15 digits"
+                  validate: {
+                    length: value => {
+                      // Remove non-digit characters
+                      const digits = value.replace(/\D/g, "");
+                      if (digits.length < 10) {
+                        return "Phone number must have at least 10 digits";
+                      }
+                      if (digits.length > 15) {
+                        return "Phone number cannot exceed 15 digits";
+                      }
+                      return true;
+                    }
                   },
                   pattern: {
                     value: /^[0-9+\-() ]+$/,
-                    message: "Please enter a valid phone number"
+                    message:
+                      "Please enter a valid phone number using digits, spaces, () or +"
                   }
                 })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
@@ -419,7 +429,6 @@ export default function HomePage({ data }) {
                 />
                 <label htmlFor="other">Other</label>
               </div>
-              {/* If you want to ensure at least one service is chosen, you could implement custom validation here. */}
             </div>
 
             {/* Message */}
@@ -442,9 +451,15 @@ export default function HomePage({ data }) {
                   maxLength: {
                     value: 1000,
                     message: "Message cannot exceed 1000 characters"
+                  },
+                  validate: {
+                    notEmpty: value =>
+                      value.trim().length > 0 ||
+                      "Message cannot be empty or just whitespace"
                   }
                 })}
-                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"></textarea>
+                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
+              />
               {errors.message && (
                 <span className="text-sm text-red-600">
                   {errors.message.message}
@@ -459,6 +474,17 @@ export default function HomePage({ data }) {
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
+          {/* Success or Error Messages */}
+          {isSuccess && message && (
+            <div className="mt-4 rounded bg-green-100 p-3 text-green-800">
+              {message}
+            </div>
+          )}
+          {!isSuccess && message && (
+            <div className="mt-4 rounded bg-red-100 p-3 text-red-800">
+              {message}
+            </div>
+          )}
         </div>
 
         <section className="mt-10 rounded-lg bg-gray-50 p-6">
