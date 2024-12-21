@@ -1,8 +1,12 @@
+"use client";
+
 import Head from "next/head";
 import Link from "next/link";
 import Container from "@/components/container";
 import Image from "next/image";
 import HeroSlider from "@/components/HeroSlider";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 export default function HomePage({ data }) {
   const {
@@ -24,24 +28,15 @@ export default function HomePage({ data }) {
     servingButtonText,
     servingButtonLink
   } = data;
+
   const schemaOrg = {
     "@context": "https://schema.org",
-    "@type": "HousePainter",
+    "@type": "LocalBusiness",
     name: "Night Sun Stables",
     description:
-      "Night Sun Stables offers boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and are a great option to host a birthday party.",
+      "Night Sun Stables offers boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays.",
     image: "https://www.nightsunstables.com/img/nightsunstables.jpg",
     url: "https://www.nightsunstables.com/",
-    telephone: "",
-    priceRange: "$$",
-    // address: {
-    //   "@type": "PostalAddress",
-    //   streetAddress: "1234 West Side Blvd",
-    //   addressLocality: "Evansville",
-    //   addressRegion: "IN",
-    //   postalCode: "47712",
-    //   addressCountry: "US"
-    // },
     geo: {
       "@type": "GeoCoordinates",
       latitude: "37.9716",
@@ -53,6 +48,41 @@ export default function HomePage({ data }) {
     },
     sameAs: ["https://www.facebook.com/CarmenNHurley"]
   };
+
+  // Replace with your actual Web3Forms access key
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting }
+  } = useForm({
+    mode: "onTouched"
+  });
+
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onSubmit = async formData => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // handle success
+      } else {
+        // handle error
+      }
+    } catch (err) {
+      // handle error
+    }
+  };
+
   return (
     <>
       <Head>
@@ -69,7 +99,7 @@ export default function HomePage({ data }) {
         />
         <meta
           name="keywords"
-          content="Evansville painting, Southern Indiana painter, Haubstadt residential painter, Newburgh painting, Daylight painter, Elberfeld painter, McCutchanville painter, Cynthiana painter, Darmstadt painter, Fort Branch painter, Owensville painter, Mt. Vernon painter, Princeton painter, Poseyville painter, Chandler painter, interior painting, exterior painting, cabinet staining, murals, fine art commissions, property management painting"
+          content="Evansville horse boarding, Evansville horse lessons, Evansville horse training, Evansville horse leasing, Evansville horse camps, Evansville horse events"
         />
       </Head>
 
@@ -82,8 +112,7 @@ export default function HomePage({ data }) {
         />
       </section>
       <Container>
-        {" "}
-        <span className="text-xl font-bold">Night Sun Stables </span>
+        <span className="text-xl font-bold">Night Sun Stables</span>
         {/* Hero Section */}
         <section className="mt-2 flex flex-col items-center text-center">
           <HeroSlider />
@@ -98,6 +127,7 @@ export default function HomePage({ data }) {
             {heroButtonText}
           </Link>
         </section>
+
         {/* Three Service Cards Section */}
         <section className="mt-2">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -128,7 +158,8 @@ export default function HomePage({ data }) {
               ))}
           </div>
         </section>
-        {/* About Rich Bennett */}
+
+        {/* About Section */}
         <section className="mx-auto mt-10 max-w-4xl rounded-lg bg-blue-50 p-6">
           <h3 className="mb-4 text-2xl font-semibold">
             {aboutTitle}
@@ -140,6 +171,7 @@ export default function HomePage({ data }) {
             {aboutQuote}
           </blockquote>
         </section>
+
         <section className="mt-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {additionalServices &&
@@ -169,6 +201,7 @@ export default function HomePage({ data }) {
               ))}
           </div>
         </section>
+
         {/* Contact Form Section */}
         <div
           id="contact-form"
@@ -177,10 +210,23 @@ export default function HomePage({ data }) {
             {contactTitle}
           </h3>
           <p className="mb-6 text-gray-700">{contactDescription}</p>
+
+          {isSuccess && (
+            <div className="mb-4 rounded bg-green-100 p-3 text-green-800">
+              {message || "Thank you! Your message has been sent."}
+            </div>
+          )}
+
+          {!isSuccess && message && (
+            <div className="mb-4 rounded bg-red-100 p-3 text-red-800">
+              {message || "Oops! Something went wrong."}
+            </div>
+          )}
+
           <form
-            action="/api/contact"
-            method="POST"
+            onSubmit={handleSubmit(onSubmit)}
             className="space-y-4">
+            {/* Name */}
             <div>
               <label
                 htmlFor="name"
@@ -190,10 +236,24 @@ export default function HomePage({ data }) {
               <input
                 type="text"
                 id="name"
-                name="name"
-                required
+                {...register("name", {
+                  required: "Name is required",
+                  minLength: {
+                    value: 2,
+                    message: "Name must be at least 2 characters long"
+                  },
+                  maxLength: {
+                    value: 50,
+                    message: "Name cannot exceed 50 characters"
+                  }
+                })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
               />
+              {errors.name && (
+                <span className="text-sm text-red-600">
+                  {errors.name.message}
+                </span>
+              )}
             </div>
 
             {/* Email */}
@@ -206,10 +266,20 @@ export default function HomePage({ data }) {
               <input
                 type="email"
                 id="email"
-                name="email"
-                required
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^\S+@\S+$/i,
+                    message: "Please enter a valid email address"
+                  }
+                })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
               />
+              {errors.email && (
+                <span className="text-sm text-red-600">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
 
             {/* Phone Number */}
@@ -222,10 +292,28 @@ export default function HomePage({ data }) {
               <input
                 type="tel"
                 id="phone"
-                name="phone"
-                required
+                {...register("phone", {
+                  required: "Phone number is required",
+                  minLength: {
+                    value: 10,
+                    message: "Phone number must be at least 10 digits"
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "Phone number cannot exceed 15 digits"
+                  },
+                  pattern: {
+                    value: /^[0-9+\-() ]+$/,
+                    message: "Please enter a valid phone number"
+                  }
+                })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
               />
+              {errors.phone && (
+                <span className="text-sm text-red-600">
+                  {errors.phone.message}
+                </span>
+              )}
             </div>
 
             {/* Preferred Method of Contact */}
@@ -237,9 +325,10 @@ export default function HomePage({ data }) {
                 <input
                   type="radio"
                   id="contactEmail"
-                  name="preferredContact"
                   value="Email"
-                  required
+                  {...register("preferredContact", {
+                    required: "Please select a contact method"
+                  })}
                   className="mr-2"
                 />
                 <label htmlFor="contactEmail">Email</label>
@@ -248,8 +337,8 @@ export default function HomePage({ data }) {
                 <input
                   type="radio"
                   id="contactCall"
-                  name="preferredContact"
                   value="Call"
+                  {...register("preferredContact")}
                   className="mr-2"
                 />
                 <label htmlFor="contactCall">Call</label>
@@ -258,12 +347,17 @@ export default function HomePage({ data }) {
                 <input
                   type="radio"
                   id="contactText"
-                  name="preferredContact"
                   value="Text"
+                  {...register("preferredContact")}
                   className="mr-2"
                 />
                 <label htmlFor="contactText">Text</label>
               </div>
+              {errors.preferredContact && (
+                <span className="text-sm text-red-600">
+                  {errors.preferredContact.message}
+                </span>
+              )}
             </div>
 
             {/* Services Interested In */}
@@ -275,8 +369,8 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="interior"
-                  name="services"
                   value="Horseback Riding Lessons"
+                  {...register("services")}
                   className="mr-2"
                 />
                 <label htmlFor="interior">
@@ -287,8 +381,8 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="exterior"
-                  name="services"
                   value="Youth Camps"
+                  {...register("services")}
                   className="mr-2"
                 />
                 <label htmlFor="exterior">Youth Camps</label>
@@ -297,8 +391,8 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="murals"
-                  name="services"
                   value="Boarding & Leasing Services"
+                  {...register("services")}
                   className="mr-2"
                 />
                 <label htmlFor="murals">
@@ -309,8 +403,8 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="fineArt"
-                  name="services"
-                  value="Events"
+                  value="Birthday or Wedding"
+                  {...register("services")}
                   className="mr-2"
                 />
                 <label htmlFor="fineArt">Birthday or Wedding</label>
@@ -319,12 +413,13 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="other"
-                  name="services"
                   value="Other"
+                  {...register("services")}
                   className="mr-2"
                 />
                 <label htmlFor="other">Other</label>
               </div>
+              {/* If you want to ensure at least one service is chosen, you could implement custom validation here. */}
             </div>
 
             {/* Message */}
@@ -337,19 +432,35 @@ export default function HomePage({ data }) {
               </label>
               <textarea
                 id="message"
-                name="message"
                 rows="5"
-                required
+                {...register("message", {
+                  required: "Please enter a message",
+                  minLength: {
+                    value: 10,
+                    message: "Message must be at least 10 characters"
+                  },
+                  maxLength: {
+                    value: 1000,
+                    message: "Message cannot exceed 1000 characters"
+                  }
+                })}
                 className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"></textarea>
+              {errors.message && (
+                <span className="text-sm text-red-600">
+                  {errors.message.message}
+                </span>
+              )}
             </div>
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className="rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
-              Send Message
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
+
         <section className="mt-10 rounded-lg bg-gray-50 p-6">
           <h2 className="mb-4 text-2xl font-semibold">
             {workDirectlyTitle}
@@ -358,6 +469,7 @@ export default function HomePage({ data }) {
             {workDirectlyDescription}
           </p>
         </section>
+
         <section className="mt-10 max-w-4xl p-6">
           <h2 className="mb-4 text-2xl font-semibold">
             {servingTitle}
