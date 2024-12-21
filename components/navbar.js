@@ -49,7 +49,7 @@ export default function Navbar(props) {
                   <div className="ml-4 text-sm text-gray-600 dark:text-gray-400 md:block">
                     (812) 499-3403
                     <br />
-                    nightsunstables@hotmail.com
+                    Carmen@NightSunStables.com
                   </div>
                 </div>
                 {/* Mobile Toggle Button */}

@@ -205,7 +205,7 @@ export default function HomePage({ data }) {
         {/* Contact Form Section */}
         <div
           id="contact-form"
-          className="mt-10 rounded-lg border border-gray-200 p-6 shadow-sm">
+          className="mx-auto mt-10 max-w-4xl rounded-lg border border-gray-200 p-6 shadow-sm">
           <h3 className="mb-4 text-xl font-semibold text-gray-800">
             {contactTitle}
           </h3>
@@ -462,24 +462,29 @@ export default function HomePage({ data }) {
         </div>
 
         <section className="mt-10 rounded-lg bg-gray-50 p-6">
-          <h2 className="mb-4 text-2xl font-semibold">
-            {workDirectlyTitle}
-          </h2>
-          <p className="mx-auto max-w-4xl leading-relaxed text-gray-700">
-            {workDirectlyDescription}
-          </p>
-        </section>
-
-        <section className="mt-10 max-w-4xl p-6">
-          <h2 className="mb-4 text-2xl font-semibold">
-            {servingTitle}
-          </h2>
-          <p className="text-gray-700">{servingDescription}</p>
-          <Link
-            href={servingButtonLink}
-            className="mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
-            {servingButtonText}
-          </Link>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div>
+              <h2 className="mb-4 text-2xl font-semibold">
+                {workDirectlyTitle}
+              </h2>
+              <p className="mx-auto max-w-4xl leading-relaxed text-gray-700">
+                {workDirectlyDescription}
+              </p>
+            </div>
+            <div>
+              <h2 className="mb-4 text-2xl font-semibold">
+                {servingTitle}
+              </h2>
+              <p className="text-gray-700">{servingDescription}</p>
+            </div>
+          </div>
+          <div className="flex justify-center">
+            <Link
+              href={servingButtonLink}
+              className=" mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+              {servingButtonText}
+            </Link>
+          </div>
         </section>
       </Container>
     </>
