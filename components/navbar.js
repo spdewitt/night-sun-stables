@@ -11,43 +11,8 @@ import cx from "clsx";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { myLoader } from "@/utils/all";
 
-export default function Navbar(props) {
-  const leftmenu = [
-    {
-      label: "Home",
-      href: "/"
-    },
-    {
-      label: "About",
-      href: "/about"
-    },
-    {
-      label: "Behind the Scenes",
-      href: "/archive"
-    },
-    {
-      label: "Camps",
-      href: "/youth-camps"
-    },
-    {
-      label: "Competitions",
-      href: "/competition"
-    },
-    {
-      label: "Lessons",
-      href: "/lessons"
-    },
-    {
-      label: "Parties",
-      href: "/events"
-    },
-    {
-      label: "Services",
-      href: "/services"
-    }
-  ];
-
-  const mobilemenu = [...leftmenu];
+export default function Navbar({ navData }) {
+  const links = navData?.links || [];
 
   return (
     <Container className="bottom-border">
@@ -94,10 +59,10 @@ export default function Navbar(props) {
 
                 {/* Desktop Menu */}
                 <div className="headerLinks hidden md:flex md:items-center md:space-x-3">
-                  {leftmenu.map((item, index) => (
+                  {links.map((item, index) => (
                     <Link
-                      href={item.href}
                       key={index}
+                      href={item.href}
                       className="px-1 py-1 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400">
                       {item.label}
                     </Link>
@@ -108,10 +73,10 @@ export default function Navbar(props) {
               {/* Mobile Menu Panel */}
               <Disclosure.Panel className="md:hidden">
                 <div className="space-y-1 pb-3 pt-2">
-                  {mobilemenu.map((item, index) => (
+                  {links.map((item, index) => (
                     <Link
-                      href={item.href}
                       key={index}
+                      href={item.href}
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100 dark:text-gray-300">
                       {item.label}
                     </Link>

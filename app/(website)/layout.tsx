@@ -3,6 +3,8 @@ import Footer from "@/components/footer";
 import { urlForImage } from "@/lib/sanity/image";
 import Navbar from "@/components/navbar";
 import Script from "next/script";
+import { navigationQuery } from "@/lib/queries";
+import { sanityClient } from "@/lib/sanity.client";
 
 async function sharedMetaData(params) {
   const settings = await getSettings();
@@ -55,6 +57,7 @@ export async function generateMetadata({ params }) {
 export default async function Layout({ children, params }) {
   const settings = await getSettings();
 
+  const navData = await sanityClient.fetch(navigationQuery);
   return (
     <>
       {/* Google Analytics Scripts */}
@@ -74,7 +77,7 @@ export default async function Layout({ children, params }) {
         `}
       </Script>
 
-      <Navbar {...settings} />
+      <Navbar {...settings} navData={navData} />
       <div>{children}</div>
       <Footer {...settings} />
     </>

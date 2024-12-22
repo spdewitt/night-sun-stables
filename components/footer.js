@@ -22,7 +22,7 @@ export default function Footer() {
           Like Us on Facebook{" "}
           <Image
             src={facebook}
-            alt={"Like us on Facebook"}
+            alt={"View on Our Facebook Page for more Photos"}
             width={25}
             height={25}
             className="centerImg"
