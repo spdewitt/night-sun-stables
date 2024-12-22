@@ -31,7 +31,7 @@ export default function Navbar(props) {
     },
     {
       label: "Competitions",
-      href: "/Competition"
+      href: "/competition"
     },
     {
       label: "Lessons",
