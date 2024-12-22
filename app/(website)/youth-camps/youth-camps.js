@@ -14,7 +14,9 @@ export default function YouthCamps({ data }) {
     imageThree,
     imageFour,
     imageFive,
-    imageSix
+    imageSix,
+    imageSeven,
+    imageEight
   } = data;
 
   // Pair the initial paragraphs with images
@@ -36,7 +38,9 @@ export default function YouthCamps({ data }) {
     { imageUrl: imageThree?.asset?.url, altText: imageThree?.alt },
     { imageUrl: imageFour?.asset?.url, altText: imageFour?.alt },
     { imageUrl: imageFive?.asset?.url, altText: imageFive?.alt },
-    { imageUrl: imageSix?.asset?.url, altText: imageSix?.alt }
+    { imageUrl: imageSix?.asset?.url, altText: imageSix?.alt },
+    { imageUrl: imageSeven?.asset?.url, altText: imageSeven?.alt },
+    { imageUrl: imageEight?.asset?.url, altText: imageEight?.alt }
   ];
 
   return (

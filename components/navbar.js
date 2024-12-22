@@ -22,8 +22,28 @@ export default function Navbar(props) {
       href: "/about"
     },
     {
-      label: "Whats New at the Stables?",
+      label: "Behind the Scenes",
       href: "/archive"
+    },
+    {
+      label: "Camps",
+      href: "/youth-camps"
+    },
+    {
+      label: "Competitions",
+      href: "/Competition"
+    },
+    {
+      label: "Lessons",
+      href: "/lessons"
+    },
+    {
+      label: "Parties",
+      href: "/events"
+    },
+    {
+      label: "Services",
+      href: "/services"
     }
   ];
 
@@ -73,12 +93,12 @@ export default function Navbar(props) {
                 </Disclosure.Button>
 
                 {/* Desktop Menu */}
-                <div className="hidden md:flex md:items-center md:space-x-6">
+                <div className="headerLinks hidden md:flex md:items-center md:space-x-3">
                   {leftmenu.map((item, index) => (
                     <Link
                       href={item.href}
                       key={index}
-                      className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400">
+                      className="px-1 py-1 text-sm font-medium text-gray-600 hover:text-blue-500 dark:text-gray-400">
                       {item.label}
                     </Link>
                   ))}

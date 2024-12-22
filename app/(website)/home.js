@@ -14,6 +14,7 @@ export default function HomePage({ data }) {
     heroDescription,
     heroButtonText,
     heroButtonLink,
+    heroSlider,
     additionalServices,
     services,
     aboutTitle,
@@ -26,7 +27,8 @@ export default function HomePage({ data }) {
     servingTitle,
     servingDescription,
     servingButtonText,
-    servingButtonLink
+    servingButtonLink,
+    authorImage
   } = data;
 
   const schemaOrg = {
@@ -125,7 +127,7 @@ export default function HomePage({ data }) {
 
         {/* Hero Section */}
         <section className="mt-2 flex flex-col items-center text-center">
-          <HeroSlider />
+          <HeroSlider sliderData={heroSlider} />
 
           <h1 className="mt-2 text-2xl font-bold">{heroTitle}</h1>
           <p className="mt-4 max-w-3xl text-gray-700">
@@ -171,12 +173,33 @@ export default function HomePage({ data }) {
 
         {/* About Section */}
         <section className="mx-auto mt-10 max-w-4xl rounded-lg bg-blue-50 p-6">
+          {/* Title: Full Width */}
           <h3 className="mb-4 text-2xl font-semibold">
             {aboutTitle}
           </h3>
-          <p className="mb-6 leading-relaxed text-gray-700">
-            {aboutDescription}
-          </p>
+
+          {/* Row with Image (left) and Paragraph (right) */}
+          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12">
+            {/* Image Column */}
+            <div className="relative col-span-12 h-48 w-full flex-shrink-0 md:col-span-3">
+              {authorImage?.asset?.url && (
+                <Image
+                  src={authorImage.asset.url}
+                  alt="Carmen Hurley"
+                  fill
+                  className="rounded-md object-cover"
+                  sizes="(max-width: 768px) 100vw, 200px"
+                />
+              )}
+            </div>
+
+            {/* Paragraph Column */}
+            <p className="col-span-12 mb-3 leading-relaxed text-gray-700 md:col-span-9">
+              {aboutDescription}
+            </p>
+          </div>
+
+          {/* Quote: Full Width on Its Own Row */}
           <blockquote className="border-l-4 border-blue-600 pl-4 italic text-gray-700">
             {aboutQuote}
           </blockquote>
@@ -413,11 +436,11 @@ export default function HomePage({ data }) {
                 <input
                   type="checkbox"
                   id="fineArt"
-                  value="Birthday or Wedding"
+                  value="Birthday Parties"
                   {...register("services")}
                   className="mr-2"
                 />
-                <label htmlFor="fineArt">Birthday or Wedding</label>
+                <label htmlFor="fineArt">Birthday Parties</label>
               </div>
               <div className="mb-2 flex items-center">
                 <input
