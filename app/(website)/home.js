@@ -154,8 +154,8 @@ export default function HomePage({ data }) {
                       <Image
                         src={service.imageUrl}
                         alt={service.title}
-                        width={400}
-                        height={300}
+                        width={310}
+                        height={288}
                         className="h-72 w-full object-cover transition-transform group-hover:scale-105"
                       />
                     )}
@@ -218,8 +218,8 @@ export default function HomePage({ data }) {
                       <Image
                         src={service.imageUrl}
                         alt={service.title}
-                        width={600}
-                        height={410}
+                        width={478}
+                        height={288}
                         className="h-72 w-full object-cover transition-transform group-hover:scale-105"
                       />
                     )}

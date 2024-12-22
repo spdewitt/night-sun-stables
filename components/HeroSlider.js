@@ -31,8 +31,8 @@ function HeroSlider({ sliderData }) {
               <Image
                 src={slide.image.asset.url}
                 alt={slide.altText || `Slide ${i + 1}`}
-                width={1200}
-                height={800}
+                width={984}
+                height={656}
                 className="h-auto w-full object-cover"
                 priority={i === 0}
               />
