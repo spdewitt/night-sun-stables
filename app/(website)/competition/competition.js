@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Container from "@/components/container";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,19 @@ export default function Competition({ data }) {
     imageFour,
     paragraphFour
   } = data;
+
+  // Track which image is currently "fullscreen"
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
+  // Open the modal with the clicked image
+  const handleImageClick = (url, alt) => {
+    if (url) setFullscreenImage({ url, alt });
+  };
+
+  // Close the modal
+  const closeModal = () => {
+    setFullscreenImage(null);
+  };
 
   // Pair each paragraph with a corresponding image
   const sections = [
@@ -51,8 +65,7 @@ export default function Competition({ data }) {
         {sections.map((section, index) => (
           <div
             key={index}
-            // Apply a background color to odd rows (index 0, 2, ...)
-            // index starts from 0, so index % 2 === 0 are "even" indices but conceptually the 1st, 3rd sections, etc.
+            // index % 2 === 0 => style for the "even" index => 1st, 3rd sections, etc.
             className={`flex flex-col gap-4 md:flex-row md:items-center ${
               index % 2 === 0 ? "rounded bg-gray-100 p-4" : ""
             }`}>
@@ -68,10 +81,16 @@ export default function Competition({ data }) {
               <div className="flex justify-center md:w-1/2">
                 <Image
                   src={section.imageUrl}
-                  alt={section.altText || "About page image"}
+                  alt={section.altText || "Competition page image"}
                   width={800}
                   height={600}
-                  className="h-auto w-full max-w-full rounded object-cover"
+                  className="h-auto w-full max-w-full cursor-pointer rounded object-cover"
+                  onClick={() =>
+                    handleImageClick(
+                      section.imageUrl,
+                      section.altText
+                    )
+                  }
                 />
               </div>
             )}
@@ -87,6 +106,29 @@ export default function Competition({ data }) {
           Contact Us About Competing
         </Link>
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+          onClick={closeModal}>
+          <div className="relative max-w-4xl">
+            <Image
+              src={fullscreenImage.url}
+              alt={fullscreenImage.alt || "Fullscreen image"}
+              width={1200}
+              height={800}
+              className="h-auto max-h-[90vh] w-auto max-w-full rounded object-contain"
+            />
+            {/* Close button (optional) */}
+            <button
+              onClick={closeModal}
+              className="absolute right-3 top-3 text-2xl font-bold text-white">
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 }

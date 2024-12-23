@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Container from "@/components/container";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +17,22 @@ export default function Lessons({ data }) {
     imageThree,
     imageFour
   } = data;
+
+  // Local state to track which image (if any) is shown fullscreen
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
+  // Helper to open the modal
+  const handleImageClick = (url, alt) => {
+    // If we have a valid URL, open the modal with that image
+    if (url) {
+      setFullscreenImage({ url, alt });
+    }
+  };
+
+  // Helper to close the modal
+  const closeModal = () => {
+    setFullscreenImage(null);
+  };
 
   // Pair each paragraph with a corresponding image
   const sections = [
@@ -51,8 +68,8 @@ export default function Lessons({ data }) {
         {sections.map((section, index) => (
           <div
             key={index}
-            // Apply a background color to odd rows (index 0, 2, ...)
-            // index starts from 0, so index % 2 === 0 are "even" indices but conceptually the 1st, 3rd sections, etc.
+            // Apply a background color to "even" indices: 0, 2, ...
+            // in normal language these are the 1st, 3rd, etc.
             className={`flex flex-col gap-4 md:flex-row md:items-center ${
               index % 2 === 0 ? "rounded bg-gray-100 p-4" : ""
             }`}>
@@ -67,11 +84,19 @@ export default function Lessons({ data }) {
             {section.imageUrl && (
               <div className="flex justify-center md:w-1/2">
                 <Image
+                  // Standardize size (e.g., 400x300 in normal view).
+                  // Or remove width/height and rely on Tailwind for sizing.
+                  width={400}
+                  height={300}
                   src={section.imageUrl}
                   alt={section.altText || "About page image"}
-                  width={800}
-                  height={600}
-                  className="h-auto w-full max-w-full rounded object-cover"
+                  className="h-auto w-full max-w-full cursor-pointer rounded object-cover"
+                  onClick={() =>
+                    handleImageClick(
+                      section.imageUrl,
+                      section.altText
+                    )
+                  }
                 />
               </div>
             )}
@@ -87,6 +112,30 @@ export default function Lessons({ data }) {
           Sign Up for Horseback Riding Lessons Today!
         </Link>
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+          onClick={closeModal}>
+          {/* Clicking the overlay closes the modal; stopPropagation on the img if you want. */}
+          <div className="relative max-w-4xl">
+            <Image
+              src={fullscreenImage.url}
+              alt={fullscreenImage.alt || "Fullscreen image"}
+              width={1200}
+              height={800}
+              className="h-auto max-h-[90vh] w-auto max-w-full rounded object-contain"
+            />
+            {/* Close button (optional) */}
+            <button
+              onClick={closeModal}
+              className="absolute right-3 top-3 text-xl text-white">
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 }

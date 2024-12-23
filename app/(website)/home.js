@@ -156,13 +156,14 @@ export default function HomePage({ data }) {
                         alt={service.title}
                         width={310}
                         height={288}
+                        loading="lazy"
                         className="h-72 w-full object-cover transition-transform group-hover:scale-105"
                       />
                     )}
                     <div className="p-4">
-                      <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                      <h2 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
                         {service.title}
-                      </h3>
+                      </h2>
                       <p>{service.description}</p>
                     </div>
                   </div>
@@ -187,6 +188,7 @@ export default function HomePage({ data }) {
                   src={authorImage.asset.url}
                   alt="Carmen Hurley"
                   fill
+                  loading="lazy"
                   className="rounded-md object-cover"
                   sizes="(max-width: 768px) 100vw, 200px"
                 />
@@ -220,6 +222,7 @@ export default function HomePage({ data }) {
                         alt={service.title}
                         width={478}
                         height={288}
+                        loading="lazy"
                         className="h-72 w-full object-cover transition-transform group-hover:scale-105"
                       />
                     )}
@@ -513,17 +516,17 @@ export default function HomePage({ data }) {
         <section className="mt-10 rounded-lg bg-gray-50 p-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
-              <h2 className="mb-4 text-2xl font-semibold">
+              <h4 className="mb-4 text-2xl font-semibold">
                 {workDirectlyTitle}
-              </h2>
+              </h4>
               <p className="mx-auto max-w-4xl leading-relaxed text-gray-700">
                 {workDirectlyDescription}
               </p>
             </div>
             <div>
-              <h2 className="mb-4 text-2xl font-semibold">
+              <h4 className="mb-4 text-2xl font-semibold">
                 {servingTitle}
-              </h2>
+              </h4>
               <p className="text-gray-700">{servingDescription}</p>
             </div>
           </div>

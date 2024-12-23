@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Container from "@/components/container";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,6 +20,19 @@ export default function YouthCamps({ data }) {
     imageEight
   } = data;
 
+  // State for tracking which image is in "fullscreen" mode
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
+  // Functions to open/close the modal
+  const handleImageClick = (url, alt) => {
+    if (url) {
+      setFullscreenImage({ url, alt });
+    }
+  };
+  const closeModal = () => {
+    setFullscreenImage(null);
+  };
+
   // Pair the initial paragraphs with images
   const sections = [
     {
@@ -33,7 +47,7 @@ export default function YouthCamps({ data }) {
     }
   ];
 
-  // Additional images for the 2x2 grid
+  // Additional images for the gallery
   const galleryImages = [
     { imageUrl: imageThree?.asset?.url, altText: imageThree?.alt },
     { imageUrl: imageFour?.asset?.url, altText: imageFour?.alt },
@@ -71,7 +85,13 @@ export default function YouthCamps({ data }) {
                   alt={section.altText || "Camp page image"}
                   width={800}
                   height={600}
-                  className="h-auto w-full max-w-full rounded object-cover"
+                  className="h-auto w-full max-w-full cursor-pointer rounded object-cover"
+                  onClick={() =>
+                    handleImageClick(
+                      section.imageUrl,
+                      section.altText
+                    )
+                  }
                 />
               </div>
             )}
@@ -79,7 +99,7 @@ export default function YouthCamps({ data }) {
         ))}
       </div>
 
-      {/* Gallery Images in a 2x2 Grid */}
+      {/* Gallery Images in a 2x2 or 3x2 etc. grid */}
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {galleryImages.map((img, i) =>
           img.imageUrl ? (
@@ -89,7 +109,10 @@ export default function YouthCamps({ data }) {
               alt={img.altText || "Camp gallery image"}
               width={800}
               height={600}
-              className="h-auto w-full max-w-full rounded object-cover"
+              className="h-auto w-full max-w-full cursor-pointer rounded object-cover"
+              onClick={() =>
+                handleImageClick(img.imageUrl, img.altText)
+              }
             />
           ) : null
         )}
@@ -103,6 +126,29 @@ export default function YouthCamps({ data }) {
           Sign Up for a Camp Today!
         </Link>
       </div>
+
+      {/* Fullscreen Image Modal */}
+      {fullscreenImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+          onClick={closeModal}>
+          <div className="relative max-w-4xl">
+            <Image
+              src={fullscreenImage.url}
+              alt={fullscreenImage.alt || "Fullscreen image"}
+              width={1200}
+              height={800}
+              className="h-auto max-h-[90vh] w-auto max-w-full rounded object-contain"
+            />
+            {/* Optional close button in top-right corner */}
+            <button
+              onClick={closeModal}
+              className="absolute right-3 top-3 text-2xl font-bold text-white">
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </Container>
   );
 }
