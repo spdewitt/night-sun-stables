@@ -6,6 +6,7 @@ import Container from "@/components/container";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "../public/img/logo.webp";
+import emailAddress from "../public/img/emailAddress.jpg";
 import { urlForImage } from "@/lib/sanity/image";
 import cx from "clsx";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
@@ -34,7 +35,11 @@ export default function Navbar({ navData }) {
                   <div className="ml-4 text-sm text-gray-600 dark:text-gray-400 md:block">
                     (812) 499-3403
                     <br />
-                    Carmen@NightSunStables.com
+                    <Image
+                      src={emailAddress}
+                      alt="Email Address"
+                      className="mt-1"
+                    />
                   </div>
                 </div>
                 {/* Mobile Toggle Button */}
