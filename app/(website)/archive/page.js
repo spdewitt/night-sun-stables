@@ -19,7 +19,7 @@ export const metadata = {
     "Evansville horse events"
   ],
   alternates: {
-    canonical: "https://www.nightsunstables.com/archive"
+    canonical: "/archive"
   }
 };
 export default async function ArchivePage({ searchParams }) {

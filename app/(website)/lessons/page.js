@@ -13,7 +13,7 @@ export const metadata = {
     "Evansville horse training"
   ],
   alternates: {
-    canonical: "https://www.nightsunstables.com/lessons"
+    canonical: "/lessons"
   }
 };
 
