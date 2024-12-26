@@ -35,9 +35,11 @@ export default function Footer() {
         </div>
         <button
           onClick={handleOpenModal}
-          className="text-blue-600 underline transition-colors hover:text-blue-800">
+          className="mb-1 text-blue-600 underline transition-colors hover:text-blue-800">
           Cancellation Policy
         </button>
+        <br />
+        2601 Night Sun Dr, Evansville, IN 47725
       </div>
 
       {isModalOpen && (
