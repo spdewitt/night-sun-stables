@@ -6,4 +6,4 @@ Allow: /
 Host: https://nightsunstables.com
 
 # Sitemaps
-Sitemap: https://nightsunstables.com/sitemap.xml
+Sitemap: https://nightsunstables.com/mysitemap.xml
