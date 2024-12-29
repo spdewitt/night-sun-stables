@@ -19,10 +19,11 @@ export const metadata = {
     "Evansville horse events"
   ],
   alternates: {
-    canonical: "/archive"
+    canonical: "https://www.nightsunstables.com/archive"
   }
 };
 export default async function ArchivePage({ searchParams }) {
+  console.log(searchParams);
   return (
     <>
       <Container className="relative">

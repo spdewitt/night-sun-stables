@@ -12,7 +12,7 @@ export const metadata = {
     "Evansville horse leasing"
   ],
   alternates: {
-    canonical: "/services"
+    canonical: "https://www.nightsunstables.com/services"
   }
 };
 

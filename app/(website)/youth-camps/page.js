@@ -14,7 +14,7 @@ export const metadata = {
     "Evansville horseback riding camp"
   ],
   alternates: {
-    canonical: "/youth-camps"
+    canonical: "https://www.nightsunstables.com/youth-camps"
   }
 };
 

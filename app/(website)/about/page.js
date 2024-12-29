@@ -15,7 +15,7 @@ export const metadata = {
     "Evansville horse events"
   ],
   alternates: {
-    canonical: "/about"
+    canonical: "https://www.nightsunstables.com/about"
   }
 };
 
