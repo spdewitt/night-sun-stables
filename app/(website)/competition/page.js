@@ -8,7 +8,6 @@ export const metadata = {
     "Competitive horse riding lessons in Evansville, IN for all ages and skill levels. Learn to compete with and show horses at Night Sun Stables.",
   keywords: [
     "Evansville horse riding lessons",
-
     "Evansville horse training",
     "Evansville horse competitions"
   ],

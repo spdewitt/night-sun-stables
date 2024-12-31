@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://nightsunstables.com
+Host: https://www.nightsunstables.com
 
 # Sitemaps
-Sitemap: https://nightsunstables.com/mysitemap.xml
+Sitemap: https://www.nightsunstables.com/mysitemap.xml

@@ -102,10 +102,6 @@ export default function HomePage({ data }) {
           name="description"
           content="Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays."
         />
-        <link
-          rel="canonical"
-          href="https://www.nightsunstables.com/"
-        />
         <meta
           name="keywords"
           content="Evansville horse boarding, Evansville horse lessons, Evansville horse training, Evansville horse leasing, Evansville horse camps, Evansville horse events"
