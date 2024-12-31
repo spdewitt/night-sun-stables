@@ -48,7 +48,33 @@ export default function HomePage({ data }) {
       "@type": "Place",
       name: "Evansville and Surrounding Southern Indiana Communities"
     },
-    sameAs: ["https://www.facebook.com/CarmenNHurley"]
+    sameAs: ["https://www.facebook.com/CarmenNHurley"],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "2601 Night Sun Dr",
+      addressLocality: "Evansville",
+      addressRegion: "IN",
+      postalCode: "47725",
+      addressCountry: "US"
+    },
+    telephone: "8124993403",
+    priceRange: "$$",
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        opens: "08:00",
+        closes: "20:00"
+      }
+    ]
   };
 
   const {
