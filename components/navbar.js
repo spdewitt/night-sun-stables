@@ -39,6 +39,7 @@ export default function Navbar({ navData }) {
                       src={emailAddress}
                       alt="Email Address"
                       className="mt-1"
+                      height={16}
                     />
                   </div>
                 </div>
