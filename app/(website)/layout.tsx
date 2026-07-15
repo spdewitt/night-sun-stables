@@ -6,12 +6,73 @@ import Script from "next/script";
 import { navigationQuery } from "@/lib/queries";
 import { sanityClient } from "@/lib/sanity.client";
 
+// Rebuild pages at most once a day so Sanity edits and the Facebook
+// feed show up without a manual redeploy.
+export const revalidate = 86400;
+
+const siteUrl = "https://www.nightsunstables.com";
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${siteUrl}/#business`,
+  name: "Night Sun Stables",
+  description:
+    "Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthday parties.",
+  image: `${siteUrl}/img/opengraph.jpg`,
+  url: siteUrl,
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: "38.116517",
+    longitude: "-87.514311"
+  },
+  hasMap:
+    "https://www.google.com/maps/search/?api=1&query=Night+Sun+Stables+2601+Night+Sun+Dr+Evansville+IN+47725",
+  areaServed: [
+    { "@type": "City", name: "Evansville" },
+    { "@type": "City", name: "Newburgh" },
+    { "@type": "City", name: "McCutchanville" },
+    { "@type": "City", name: "Darmstadt" },
+    { "@type": "City", name: "Henderson" }
+  ],
+  sameAs: [
+    "https://www.facebook.com/CarmenNHurley",
+    "https://www.yelp.com/biz/night-sun-stables-evansville",
+    "https://nextdoor.com/pages/night-sun-stables-evansville-in/"
+  ],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2601 Night Sun Dr",
+    addressLocality: "Evansville",
+    addressRegion: "IN",
+    postalCode: "47725",
+    addressCountry: "US"
+  },
+  telephone: "+18124993403",
+  priceRange: "$$",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      opens: "08:00",
+      closes: "20:00"
+    }
+  ]
+};
+
 async function sharedMetaData(params) {
   const settings = await getSettings();
 
   return {
-    // enable this for resolving opengraph image
-    // metadataBase: new URL(settings.url),
+    metadataBase: new URL(siteUrl),
     title: {
       default:
         settings?.title ||
@@ -28,21 +89,23 @@ async function sharedMetaData(params) {
     ],
     authors: [{ name: "carmen" }],
     canonical: settings?.url,
-    // openGraph: {
-    //   images: [
-    //     {
-    //       url:
-    //         urlForImage(settings?.openGraphImage)?.src ||
-    //         "/img/opengraph.jpg",
-    //       width: 800,
-    //       height: 600
-    //     }
-    //   ]
-    // },
-    // twitter: {
-    //   title: settings?.title",
-    //   card: "summary_large_image"
-    // },
+    openGraph: {
+      siteName: "Night Sun Stables",
+      type: "website",
+      locale: "en_US",
+      images: [
+        {
+          url:
+            urlForImage(settings?.openGraphImage)?.src ||
+            "/img/opengraph.jpg",
+          width: 800,
+          height: 600
+        }
+      ]
+    },
+    twitter: {
+      card: "summary_large_image"
+    },
     robots: {
       index: true,
       follow: true
@@ -60,6 +123,14 @@ export default async function Layout({ children, params }) {
   const navData = await sanityClient.fetch(navigationQuery);
   return (
     <>
+      {/* LocalBusiness structured data, site-wide */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessSchema)
+        }}
+      />
+
       {/* Google Analytics Scripts */}
       <Script
         src="https://www.googletagmanager.com/gtag/js?id=G-K02XYN136N"

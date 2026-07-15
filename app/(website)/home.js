@@ -1,14 +1,14 @@
 "use client";
 
-import Head from "next/head";
 import Link from "next/link";
 import Container from "@/components/container";
 import Image from "next/image";
 import HeroSlider from "@/components/HeroSlider";
+import FacebookFeed from "@/components/facebookFeed";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 
-export default function HomePage({ data }) {
+export default function HomePage({ data, facebookPosts }) {
   const {
     heroTitle,
     heroDescription,
@@ -30,52 +30,6 @@ export default function HomePage({ data }) {
     servingButtonLink,
     authorImage
   } = data;
-
-  const schemaOrg = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Night Sun Stables",
-    description:
-      "Night Sun Stables offers boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays.",
-    image: "https://www.nightsunstables.com/img/nightsunstables.jpg",
-    url: "https://www.nightsunstables.com/",
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: "37.9716",
-      longitude: "-87.5711"
-    },
-    areaServed: {
-      "@type": "Place",
-      name: "Evansville and Surrounding Southern Indiana Communities"
-    },
-    sameAs: ["https://www.facebook.com/CarmenNHurley"],
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "2601 Night Sun Dr",
-      addressLocality: "Evansville",
-      addressRegion: "IN",
-      postalCode: "47725",
-      addressCountry: "US"
-    },
-    telephone: "8124993403",
-    priceRange: "$$",
-    openingHoursSpecification: [
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        opens: "08:00",
-        closes: "20:00"
-      }
-    ]
-  };
 
   const {
     register,
@@ -120,30 +74,6 @@ export default function HomePage({ data }) {
 
   return (
     <>
-      <Head>
-        <title>
-          Night Sun Stables | Horse Boarding, Lessons and Youth Camps
-        </title>
-        <meta
-          name="description"
-          content="Night Sun Stables offers horse boarding, training, leasing and lessons for all ages and skill levels. We host Youth Camps and birthdays."
-        />
-        <meta
-          name="keywords"
-          content="Evansville horse boarding, Evansville horse lessons, Evansville horse training, Evansville horse leasing, Evansville horse camps, Evansville horse events"
-        />
-      </Head>
-
-      {/* Structured data for SEO */}
-      <section>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaOrg)
-          }}
-        />
-      </section>
-
       <Container>
         <span className="text-xl font-bold">Night Sun Stables</span>
 
@@ -259,6 +189,9 @@ export default function HomePage({ data }) {
               ))}
           </div>
         </section>
+
+        {/* Latest from Facebook */}
+        <FacebookFeed posts={facebookPosts} />
 
         {/* Contact Form Section */}
         <div

@@ -1,6 +1,7 @@
 import HomePage from "./home";
 import { sanityClient } from "@/lib/sanity.client";
 import { homePageQuery } from "@/lib/queries";
+import { getFacebookPosts } from "@/lib/facebook";
 export const metadata = {
   title:
     "Night Sun Stables | Horse Boarding, Lessons and Youth Camps",
@@ -20,7 +21,8 @@ export const metadata = {
 };
 export default async function IndexPage() {
   const data = await sanityClient.fetch(homePageQuery);
-  return <HomePage data={data} />;
+  const facebookPosts = await getFacebookPosts();
+  return <HomePage data={data} facebookPosts={facebookPosts} />;
 }
 
 // export const revalidate = 60;

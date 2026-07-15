@@ -38,8 +38,19 @@ export default function Footer() {
           className="mb-1 text-blue-600 underline transition-colors hover:text-blue-800">
           Cancellation Policy
         </button>
-        <br />
-        2601 Night Sun Dr, Evansville, IN 47725
+        <address className="not-italic">
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Night+Sun+Stables+2601+Night+Sun+Dr+Evansville+IN+47725"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline">
+            2601 Night Sun Dr, Evansville, IN 47725
+          </a>
+          <br />
+          <a href="tel:+18124993403" className="hover:underline">
+            (812) 499-3403
+          </a>
+        </address>
       </div>
 
       {isModalOpen && (
