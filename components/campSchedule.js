@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 // Upcoming, dated events with open availability. Update as the season
-// changes — past-dated items should be removed or moved to "programs".
+// changes. Past-dated items should be removed or moved to "programs".
 const upcoming = [
   {
     name: "3-Day Summer Horse Camp",
@@ -9,7 +9,7 @@ const upcoming = [
     time: "10:00 AM – 2:30 PM",
     ages: "Ages 6 & Up",
     price: "$250",
-    note: "Spots still open — ride twice a day, plus crafts, games, and horse care.",
+    note: "Spots still open: ride twice a day, plus crafts, games, and horse care.",
     status: "open"
   }
 ];
@@ -24,7 +24,7 @@ const programs = [
   {
     name: "Themed Day Camps",
     price: "$125 / day",
-    body: "Single-day camps built around a theme — Spa Day, Patriotic, Horse Care & Health, and more."
+    body: "Single-day camps built around a theme: Spa Day, Patriotic, Horse Care & Health, and more."
   },
   {
     name: "Mini Camps",
@@ -39,7 +39,7 @@ const programs = [
   {
     name: "Parents' Night Out",
     price: "$60 / child",
-    body: "Ages 6+. Drop the kids for an evening of horseback riding, crafts, and games — snacks and drinks provided."
+    body: "Ages 6+. Drop the kids for an evening of horseback riding, crafts, and games, with snacks and drinks provided."
   }
 ];
 

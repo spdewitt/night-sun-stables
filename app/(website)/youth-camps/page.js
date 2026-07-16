@@ -1,16 +1,16 @@
-import { youthCampsContent } from "@/lib/content";
-import Contact from "./youth-camps";
+import YouthCamps from "./youth-camps";
 
 export const metadata = {
-  title: "Evansville Youth Camps | Night Sun Stables",
+  title: "Horse Camps for Kids in Evansville, IN | Night Sun Stables",
   description:
-    "Night Sun Stables offers summer horse camps for kids in Evansville, IN. Learn to ride, care for and communicate with horses at Night Sun Stables.",
+    "Summer and fall horse camps for kids in Evansville, IN. Riding, grooming, crafts, and hands-on horse care for all ages and skill levels at Night Sun Stables.",
   keywords: [
-    "Evansville summer camp",
     "Evansville horse camp",
-    "Evansville horse riding camp",
-    "Evansville youth camp",
-    "Evansville horseback riding camp"
+    "summer horse camp Evansville IN",
+    "kids horse camp Evansville",
+    "youth riding camp Evansville",
+    "horseback riding camp for kids",
+    "day camp Evansville Indiana"
   ],
   alternates: {
     canonical: "https://www.nightsunstables.com/youth-camps"
@@ -54,7 +54,40 @@ const eventSchema = {
   }
 };
 
-export default function ContactPage() {
+const faqs = [
+  {
+    q: "What ages are your horse camps for?",
+    a: "We offer camps for a wide range of ages. Mini camps are for ages 3–6 with a parent or guardian, and our 3-day and themed day camps welcome kids ages 6 and up. There's a camp for every age and experience level."
+  },
+  {
+    q: "Does my child need riding experience?",
+    a: "No experience needed. Our camps welcome first-time riders and experienced kids alike, with instruction matched to each camper's level in a safe, supportive setting."
+  },
+  {
+    q: "What do campers do each day?",
+    a: "Campers ride, learn to groom and care for the horses, play horsemanship games, do crafts, and take on fun challenges like obstacle courses, all under the guidance of experienced staff."
+  },
+  {
+    q: "Where are your camps located?",
+    a: "Night Sun Stables is at 2601 Night Sun Dr on the north side of Evansville, Indiana, serving Evansville, Newburgh, and the surrounding communities. With an indoor arena, camp runs rain or shine."
+  },
+  {
+    q: "How do I register for a camp?",
+    a: "Call us at (812) 499-3403 or send a message through our contact form to check current dates and reserve your child's spot. Camps fill up, so early registration is encouraged."
+  }
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(f => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a }
+  }))
+};
+
+export default function YouthCampsPage() {
   return (
     <>
       <script
@@ -63,9 +96,13 @@ export default function ContactPage() {
           __html: JSON.stringify(eventSchema)
         }}
       />
-      <Contact data={youthCampsContent} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(faqSchema)
+        }}
+      />
+      <YouthCamps faqs={faqs} />
     </>
   );
 }
-
-// export const revalidate = 60;

@@ -3,8 +3,16 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function Gallery({ images }) {
+export default function Gallery({ images, columns = 3 }) {
   const [active, setActive] = useState(null); // index or null
+  const gridClass =
+    columns === 2
+      ? "mt-8 grid grid-cols-2 gap-4"
+      : "mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3";
+  const imgSizes =
+    columns === 2
+      ? "(max-width: 640px) 50vw, 50vw"
+      : "(max-width: 640px) 50vw, 33vw";
 
   useEffect(() => {
     const onKey = e => {
@@ -20,7 +28,7 @@ export default function Gallery({ images }) {
 
   return (
     <>
-      <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <div className={gridClass}>
         {images.map((img, i) => (
           <button
             key={i}
@@ -30,7 +38,7 @@ export default function Gallery({ images }) {
               src={img.src}
               alt={img.alt}
               fill
-              sizes="(max-width: 640px) 50vw, 33vw"
+              sizes={imgSizes}
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </button>

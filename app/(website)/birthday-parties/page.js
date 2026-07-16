@@ -24,7 +24,7 @@ const highlights = [
   },
   {
     title: "Meet & Groom the Horses",
-    body: "Kids learn to brush, pet, and care for the horses up close — a hands-on experience they'll be talking about for weeks."
+    body: "Kids learn to brush, pet, and care for the horses up close, a hands-on experience they'll be talking about for weeks."
   },
   {
     title: "A Beautiful Barn Setting",
@@ -80,7 +80,7 @@ export default function BirthdayPartiesPage() {
         </h1>
         <p className="mt-4 text-lg leading-relaxed text-gray-600">
           Give your child a birthday they&apos;ll never forget. Riding,
-          grooming, and hands-on horse fun at our Evansville farm — a
+          grooming, and hands-on horse fun at our Evansville farm. A
           magical day for horse-loving kids of all ages.
         </p>
         <Link href="/#contact-form" className="btn-primary mt-6">

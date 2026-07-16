@@ -12,7 +12,7 @@ const FACEBOOK_PAGE_URL = "https://www.facebook.com/CarmenNHurley";
  *    HTML that search engines can index, refreshed daily.
  * 2. `posts` null/empty: falls back to the official Facebook Page
  *    Plugin iframe, which needs no credentials since the page is public.
- *    The iframe only renders after mount — ad blockers strip Facebook
+ *    The iframe only renders after mount; ad blockers strip Facebook
  *    embeds from the DOM, which breaks React hydration if the iframe
  *    is part of the server-rendered HTML.
  */
