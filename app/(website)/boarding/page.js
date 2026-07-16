@@ -18,8 +18,8 @@ export const metadata = {
 
 const features = [
   {
-    title: "12x12 Matted Stalls",
-    body: "Every stall is a full 12x12 and fully matted for comfort. We offer both indoor stalls and a shed-row option to suit your horse."
+    title: "Clean, Comfortable Stalls",
+    body: "Indoor stalls and a shed-row option to suit your horse, kept clean and comfortable year-round."
   },
   {
     title: "Indoor & Outdoor Arenas",
@@ -27,7 +27,7 @@ const features = [
   },
   {
     title: "Daily Care You Can Trust",
-    body: "Feeding, turnout, and stall cleaning handled by experienced horse people. Owner Carmen Hurley is a John Lyons Certified trainer on-site."
+    body: "Feeding, turnout, and stall cleaning handled by experienced professionals. Owner Carmen Hurley is a John Lyons Certified trainer on-site."
   },
   {
     title: "A Welcoming Community",
@@ -38,7 +38,7 @@ const features = [
 const faqs = [
   {
     q: "What type of boarding do you offer?",
-    a: "We offer full-care boarding with 12x12 matted stalls, both indoor and shed-row options, daily feeding and turnout, and access to our indoor and outdoor arenas."
+    a: "We offer full-care boarding with both indoor stalls and a shed-row option, daily feeding and turnout, and access to our indoor and outdoor arenas."
   },
   {
     q: "Where are you located?",

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Container from "@/components/container";
 import Image from "next/image";
 import Link from "next/link";
+import CampSchedule from "@/components/campSchedule";
 
 export default function YouthCamps({ data }) {
   const {
@@ -118,11 +119,12 @@ export default function YouthCamps({ data }) {
         )}
       </div>
 
+      {/* 2026 Camp schedule + program list */}
+      <CampSchedule />
+
       {/* Sign Up / Contact Us Button */}
-      <div className="mt-8 flex justify-center">
-        <Link
-          href="/#contact-form"
-          className="mt-6 inline-block rounded bg-forest-600 px-6 py-3 text-white transition hover:bg-forest-700">
+      <div className="mt-10 flex justify-center">
+        <Link href="/#contact-form" className="btn-primary">
           Sign Up for a Camp Today!
         </Link>
       </div>
