@@ -1,11 +1,7 @@
-import { Suspense } from "react";
 import Container from "@/components/container";
-import Archive from "./archive";
-import Loading from "@/components/loading";
+import PostList from "@/components/postlist";
+import { posts } from "@/lib/posts";
 
-export const dynamic = "force-dynamic";
-
-export const runtime = "edge";
 export const metadata = {
   title: "Inside Night Sun Stables",
   description:
@@ -22,22 +18,27 @@ export const metadata = {
     canonical: "https://www.nightsunstables.com/archive"
   }
 };
-export default async function ArchivePage({ searchParams }) {
-  console.log(searchParams);
+
+export default function ArchivePage() {
   return (
-    <>
-      <Container className="relative">
-        <h1 className="text-center text-3xl font-semibold tracking-tight dark:text-white lg:text-4xl lg:leading-snug">
-          An Inside Look at Night Sun Stables
-        </h1>
-        <Suspense
-          key={searchParams.page || "1"}
-          fallback={<Loading />}>
-          <Archive searchParams={searchParams} />
-        </Suspense>
-      </Container>
-    </>
+    <Container className="relative">
+      <h1 className="text-center text-3xl font-semibold tracking-tight lg:text-4xl lg:leading-snug">
+        An Inside Look at Night Sun Stables
+      </h1>
+
+      {posts.length === 0 ? (
+        <div className="flex h-40 items-center justify-center">
+          <span className="text-lg text-gray-500">
+            Check back soon for stories from the barn!
+          </span>
+        </div>
+      ) : (
+        <div className="mt-10 grid gap-10 md:grid-cols-2 lg:gap-10 xl:grid-cols-3">
+          {posts.map(post => (
+            <PostList key={post.slug} post={post} aspect="square" />
+          ))}
+        </div>
+      )}
+    </Container>
   );
 }
-
-// export const revalidate = 60;

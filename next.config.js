@@ -6,7 +6,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: true,
     remotePatterns: [
-      { hostname: "cdn.sanity.io" },
       // Facebook post images (Graph API feed)
       { hostname: "**.fbcdn.net" },
       { hostname: "**.facebook.com" }

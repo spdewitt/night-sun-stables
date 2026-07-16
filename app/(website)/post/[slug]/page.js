@@ -1,28 +1,25 @@
 import PostPage from "./default";
+import { notFound } from "next/navigation";
+import { getAllPostSlugs, getPostBySlug } from "@/lib/posts";
 
-import { getAllPostsSlugs, getPostBySlug } from "@/lib/sanity/client";
-
-export async function generateStaticParams() {
-  return await getAllPostsSlugs();
+export function generateStaticParams() {
+  return getAllPostSlugs();
 }
 
-export async function generateMetadata({ params }) {
-  const post = await getPostBySlug(params.slug);
+export function generateMetadata({ params }) {
+  const post = getPostBySlug(params.slug);
+  if (!post) return {};
   return {
     title: post.title,
-    description: post.excerpt ?? "Default description if none exists",
-    // If your post data has keywords, you could do something like:
-    // keywords: post.keywords ?? [],
+    description: post.excerpt ?? "Night Sun Stables",
     alternates: {
-      // Notice the template literal to insert the slug dynamically
       canonical: `https://www.nightsunstables.com/post/${params.slug}`
     }
   };
 }
 
-export default async function PostDefault({ params }) {
-  const post = await getPostBySlug(params.slug);
+export default function PostDefault({ params }) {
+  const post = getPostBySlug(params.slug);
+  if (!post) notFound();
   return <PostPage post={post} />;
 }
-
-// export const revalidate = 60;

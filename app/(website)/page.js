@@ -1,6 +1,5 @@
 import HomePage from "./home";
-import { sanityClient } from "@/lib/sanity.client";
-import { homePageQuery } from "@/lib/queries";
+import { homeContent } from "@/lib/content";
 import { getFacebookPosts } from "@/lib/facebook";
 export const metadata = {
   title:
@@ -20,9 +19,8 @@ export const metadata = {
   }
 };
 export default async function IndexPage() {
-  const data = await sanityClient.fetch(homePageQuery);
   const facebookPosts = await getFacebookPosts();
-  return <HomePage data={data} facebookPosts={facebookPosts} />;
+  return <HomePage data={homeContent} facebookPosts={facebookPosts} />;
 }
 
 // export const revalidate = 60;

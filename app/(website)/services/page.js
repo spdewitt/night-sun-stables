@@ -1,5 +1,4 @@
-import { sanityClient } from "@/lib/sanity.client";
-import { servicesQuery } from "@/lib/queries";
+import { servicesContent } from "@/lib/content";
 import Contact from "./services";
 
 export const metadata = {
@@ -16,9 +15,8 @@ export const metadata = {
   }
 };
 
-export default async function ContactPage() {
-  const data = await sanityClient.fetch(servicesQuery);
-  return <Contact data={data} />;
+export default function ContactPage() {
+  return <Contact data={servicesContent} />;
 }
 
 // export const revalidate = 60;

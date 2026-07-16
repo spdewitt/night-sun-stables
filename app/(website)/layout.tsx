@@ -1,13 +1,9 @@
-import { getSettings } from "@/lib/sanity/client";
 import Footer from "@/components/footer";
-import { urlForImage } from "@/lib/sanity/image";
 import Navbar from "@/components/navbar";
 import Script from "next/script";
-import { navigationQuery } from "@/lib/queries";
-import { sanityClient } from "@/lib/sanity.client";
 
-// Rebuild pages at most once a day so Sanity edits and the Facebook
-// feed show up without a manual redeploy.
+// Rebuild pages at most once a day so the Facebook feed refreshes
+// without a manual redeploy.
 export const revalidate = 86400;
 
 const siteUrl = "https://www.nightsunstables.com";
@@ -68,59 +64,39 @@ const localBusinessSchema = {
   ]
 };
 
-async function sharedMetaData(params) {
-  const settings = await getSettings();
+export const metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default:
+      "Night Sun Stables | Horseback Riding Lessons and Camps in Evansville",
+    template: "%s"
+  },
+  description:
+    "Night Sun Stables offers horse boarding, lessons, youth camps and birthday parties in Evansville, IN for all ages and skill levels.",
+  keywords: [
+    "Horse Riding Evansville",
+    "Horse riding Evansville",
+    "horseback riding evansville"
+  ],
+  authors: [{ name: "Carmen Hurley" }],
+  openGraph: {
+    siteName: "Night Sun Stables",
+    type: "website",
+    locale: "en_US",
+    images: [
+      { url: "/img/opengraph.jpg", width: 800, height: 600 }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image"
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+};
 
-  return {
-    metadataBase: new URL(siteUrl),
-    title: {
-      default:
-        settings?.title ||
-        "Horseback Riding Lessons and Camps in Evansville",
-      template: "%s"
-    },
-    description:
-      settings?.description ||
-      "Night Sun Stables Horse Riding lessons and camps in Evansville.",
-    keywords: [
-      "Horse Riding Evansville",
-      "Horse riding Evansville",
-      "horseback riding evansville"
-    ],
-    authors: [{ name: "carmen" }],
-    canonical: settings?.url,
-    openGraph: {
-      siteName: "Night Sun Stables",
-      type: "website",
-      locale: "en_US",
-      images: [
-        {
-          url:
-            urlForImage(settings?.openGraphImage)?.src ||
-            "/img/opengraph.jpg",
-          width: 800,
-          height: 600
-        }
-      ]
-    },
-    twitter: {
-      card: "summary_large_image"
-    },
-    robots: {
-      index: true,
-      follow: true
-    }
-  };
-}
-
-export async function generateMetadata({ params }) {
-  return await sharedMetaData(params);
-}
-
-export default async function Layout({ children, params }) {
-  const settings = await getSettings();
-
-  const navData = await sanityClient.fetch(navigationQuery);
+export default function Layout({ children }) {
   return (
     <>
       {/* LocalBusiness structured data, site-wide */}
@@ -148,9 +124,9 @@ export default async function Layout({ children, params }) {
         `}
       </Script>
 
-      <Navbar {...settings} navData={navData} />
+      <Navbar />
       <div>{children}</div>
-      <Footer {...settings} />
+      <Footer />
     </>
   );
 }

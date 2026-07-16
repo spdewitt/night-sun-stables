@@ -1,5 +1,4 @@
-import { sanityClient } from "@/lib/sanity.client";
-import { youthCampsQuery } from "@/lib/queries";
+import { youthCampsContent } from "@/lib/content";
 import Contact from "./youth-camps";
 
 export const metadata = {
@@ -55,8 +54,7 @@ const eventSchema = {
   }
 };
 
-export default async function ContactPage() {
-  const data = await sanityClient.fetch(youthCampsQuery);
+export default function ContactPage() {
   return (
     <>
       <script
@@ -65,7 +63,7 @@ export default async function ContactPage() {
           __html: JSON.stringify(eventSchema)
         }}
       />
-      <Contact data={data} />
+      <Contact data={youthCampsContent} />
     </>
   );
 }

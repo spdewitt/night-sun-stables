@@ -1,5 +1,4 @@
-import { sanityClient } from "@/lib/sanity.client";
-import { aboutPageQuery } from "@/lib/queries";
+import { aboutContent } from "@/lib/content";
 import About from "./about"; // The component file you showed
 
 export const metadata = {
@@ -22,7 +21,6 @@ export const metadata = {
 // If you need ISR (Incremental Static Regeneration):
 // export const revalidate = 60;
 
-export default async function AboutPage() {
-  const data = await sanityClient.fetch(aboutPageQuery);
-  return <About data={data} />;
+export default function AboutPage() {
+  return <About data={aboutContent} />;
 }

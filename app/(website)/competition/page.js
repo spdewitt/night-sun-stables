@@ -1,5 +1,4 @@
-import { sanityClient } from "@/lib/sanity.client";
-import { competitionQuery } from "@/lib/queries";
+import { competitionContent } from "@/lib/content";
 import Competition from "./competition";
 
 export const metadata = {
@@ -16,9 +15,8 @@ export const metadata = {
   }
 };
 
-export default async function ContactPage() {
-  const data = await sanityClient.fetch(competitionQuery);
-  return <Competition data={data} />;
+export default function ContactPage() {
+  return <Competition data={competitionContent} />;
 }
 
 // export const revalidate = 60;
