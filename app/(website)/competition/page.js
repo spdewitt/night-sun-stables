@@ -2,7 +2,7 @@ import { competitionContent } from "@/lib/content";
 import Competition from "./competition";
 
 export const metadata = {
-  title: "Competitve Horse Riding lessons in Evansville, IN. ",
+  title: "Competitive Horse Riding Lessons in Evansville, IN | Night Sun Stables",
   description:
     "Competitive horse riding lessons in Evansville, IN for all ages and skill levels. Learn to compete with and show horses at Night Sun Stables.",
   keywords: [

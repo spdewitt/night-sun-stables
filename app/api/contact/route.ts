@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, email, phone, preferredContact, services, message } =
-    await request.json();
+  const {
+    name,
+    email,
+    phone,
+    preferredContact,
+    services,
+    message,
+    botcheck
+  } = await request.json();
   const payload = {
     access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
     subject: "New Inquiry from Night Sun Stables",
@@ -10,6 +17,8 @@ export async function POST(request) {
     // from_email is required by web3forms
     from_email: "no-reply@nightsunstables.com",
     reply_to: email,
+    // Spam honeypot — Web3Forms silently rejects if this is truthy
+    botcheck,
     name,
     email,
     phone,

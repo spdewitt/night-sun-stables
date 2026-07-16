@@ -36,15 +36,20 @@ export default function ArchivePage() {
             Photo Galleries
           </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {galleries.map(g => (
+            {galleries.map(g => {
+              // Optional 1-based thumbnailIndex picks a specific image
+              // for the card; defaults to the first image.
+              const thumb =
+                g.images[(g.thumbnailIndex || 1) - 1] || g.images[0];
+              return (
               <Link
                 key={g.slug}
                 href={`/archive/${g.slug}`}
                 className="card group block">
                 <div className="relative h-56 w-full">
                   <Image
-                    src={g.images[0].src}
-                    alt={g.images[0].alt}
+                    src={thumb.src}
+                    alt={thumb.alt}
                     fill
                     sizes="(max-width: 640px) 100vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -57,7 +62,8 @@ export default function ArchivePage() {
                   </h3>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
       )}

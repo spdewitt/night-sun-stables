@@ -209,6 +209,16 @@ export default function HomePage({ data, facebookPosts }) {
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4">
+            {/* Honeypot: hidden from real users; bots that fill it are
+                rejected by Web3Forms. Not a real field. */}
+            <input
+              type="checkbox"
+              tabIndex={-1}
+              autoComplete="off"
+              className="hidden"
+              aria-hidden="true"
+              {...register("botcheck")}
+            />
             {/* Name */}
             <div>
               <label

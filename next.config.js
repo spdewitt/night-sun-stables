@@ -18,6 +18,16 @@ const nextConfig = {
   eslint: {
     /// Set this to false if you want production builds to abort if there's lint errors
     ignoreDuringBuilds: process.env.VERCEL_ENV === "production"
+  },
+  async redirects() {
+    return [
+      // Consolidate the old birthday page into the canonical one
+      {
+        source: "/events",
+        destination: "/birthday-parties",
+        permanent: true
+      }
+    ];
   }
 };
 
