@@ -33,7 +33,7 @@ export default function FacebookFeed({ posts }) {
           href={FACEBOOK_PAGE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 hover:underline">
+          className="text-forest-600 hover:underline">
           Follow us on Facebook
         </a>
       </div>

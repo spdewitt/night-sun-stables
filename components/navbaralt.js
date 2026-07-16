@@ -65,7 +65,7 @@ export default function NavbarAlt(props) {
                   </Link>
                   <Disclosure.Button
                     aria-label="Toggle Menu"
-                    className="ml-auto rounded-md px-2 py-1 text-gray-500 focus:text-blue-500 focus:outline-none dark:text-gray-300 lg:hidden ">
+                    className="ml-auto rounded-md px-2 py-1 text-gray-500 focus:text-forest-600 focus:outline-none dark:text-gray-300 lg:hidden ">
                     <svg
                       className="h-6 w-6 fill-current"
                       xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ export default function NavbarAlt(props) {
                           <Link
                             href={item.href}
                             key={index + item.label}
-                            className="rounded-full px-5 py-2 font-medium text-gray-600 outline-none ring-blue-100 hover:text-blue-500 focus-visible:text-blue-500 focus-visible:ring-2 dark:text-gray-400"
+                            className="rounded-full px-5 py-2 font-medium text-gray-600 outline-none ring-forest-100 hover:text-forest-600 focus-visible:text-forest-600 focus-visible:ring-2 dark:text-gray-400"
                             target={item.external ? "_blank" : ""}
                             rel={item.external ? "noopener" : ""}>
                             {item.label}
@@ -132,7 +132,7 @@ export default function NavbarAlt(props) {
                         <Link
                           href={item.href}
                           key={index + item.label}
-                          className="rounded-full px-5 py-2 text-sm font-medium text-gray-600 outline-none ring-blue-100 hover:text-blue-500 focus-visible:text-blue-500 focus-visible:ring-2 dark:text-gray-400"
+                          className="rounded-full px-5 py-2 text-sm font-medium text-gray-600 outline-none ring-forest-100 hover:text-forest-600 focus-visible:text-forest-600 focus-visible:ring-2 dark:text-gray-400"
                           target={item.external ? "_blank" : ""}
                           rel={item.external ? "noopener" : ""}>
                           {item.label}
@@ -162,9 +162,9 @@ const DropdownMenu = ({ menu, items, mobile }) => {
         <>
           <Menu.Button
             className={cx(
-              "flex items-center gap-x-1 rounded-full px-5 py-2  font-medium outline-none ring-blue-100 transition-all focus-visible:text-blue-500 focus-visible:ring-2",
+              "flex items-center gap-x-1 rounded-full px-5 py-2  font-medium outline-none ring-forest-100 transition-all focus-visible:text-forest-600 focus-visible:ring-2",
               open
-                ? "text-blue-500 hover:text-blue-500"
+                ? "text-forest-600 hover:text-forest-600"
                 : " text-gray-600 dark:text-gray-400 ",
               mobile
                 ? "w-full px-4 py-2 text-sm"
@@ -195,8 +195,8 @@ const DropdownMenu = ({ menu, items, mobile }) => {
                         className={cx(
                           "flex items-center space-x-2 px-5 py-2 text-sm lg:space-x-4",
                           active
-                            ? "text-blue-500"
-                            : "text-gray-700 hover:text-blue-500 focus:text-blue-500 dark:text-gray-300"
+                            ? "text-forest-600"
+                            : "text-gray-700 hover:text-forest-600 focus:text-forest-600 dark:text-gray-300"
                         )}>
                         <span> {item.title}</span>
                       </Link>

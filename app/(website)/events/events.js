@@ -64,7 +64,7 @@ export default function Events({ data }) {
       <div className="mt-8 flex justify-center">
         <Link
           href="/#contact-form"
-          className="mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+          className="mt-6 inline-block rounded bg-forest-600 px-6 py-3 text-white transition hover:bg-forest-700">
           Contact Us about Hosting a Birthday Party
         </Link>
       </div>

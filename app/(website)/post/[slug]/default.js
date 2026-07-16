@@ -114,7 +114,7 @@ export default function Post(props) {
 
       <Container>
         <article className="mx-auto max-w-screen-md ">
-          <div className="prose mx-auto my-3 dark:prose-invert prose-a:text-blue-600">
+          <div className="prose mx-auto my-3 dark:prose-invert prose-a:text-forest-600">
             {post.body && <PortableText value={post.body} />}
           </div>
 
@@ -160,7 +160,7 @@ export default function Post(props) {
           <div className="mb-7 mt-7 flex justify-center">
             <Link
               href="/archive"
-              className="bg-brand-secondary/20 rounded-full px-5 py-2 text-sm text-blue-600 dark:text-blue-500 ">
+              className="bg-brand-secondary/20 rounded-full px-5 py-2 text-sm text-forest-600 dark:text-forest-600 ">
               ← View all posts
             </Link>
           </div>

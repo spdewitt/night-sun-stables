@@ -6,4 +6,38 @@
 @import "prism.css";
 /*! purgecss end ignore */
 
-/*Custom Styles Here*/
+@layer base {
+  body {
+    @apply bg-cream-50 text-gray-700;
+  }
+  .dark body {
+    @apply bg-stone-950 text-gray-300;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif text-barn-800;
+  }
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4 {
+    @apply text-cream-100;
+  }
+}
+
+@layer components {
+  /* Primary call-to-action button */
+  .btn-primary {
+    @apply inline-block rounded-lg bg-forest-600 px-6 py-3 font-medium text-cream-50 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-forest-700 hover:shadow-md;
+  }
+  /* Card surface */
+  .card {
+    @apply overflow-hidden rounded-xl border border-cream-300 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg dark:border-stone-800 dark:bg-stone-900;
+  }
+  /* Soft section band */
+  .section-band {
+    @apply rounded-2xl border border-cream-200 bg-cream-100 dark:border-stone-800 dark:bg-stone-900;
+  }
+}

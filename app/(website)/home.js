@@ -75,25 +75,25 @@ export default function HomePage({ data, facebookPosts }) {
   return (
     <>
       <Container>
-        <span className="text-xl font-bold">Night Sun Stables</span>
-
         {/* Hero Section */}
-        <section className="mt-2 flex flex-col items-center text-center">
-          <HeroSlider sliderData={heroSlider} />
+        <section className="mt-4 flex flex-col items-center text-center">
+          <div className="w-full overflow-hidden rounded-2xl shadow-md ring-1 ring-cream-300">
+            <HeroSlider sliderData={heroSlider} />
+          </div>
 
-          <h1 className="mt-2 text-2xl font-bold">{heroTitle}</h1>
-          <p className="mt-4 max-w-3xl text-gray-700">
+          <h1 className="mt-8 max-w-3xl text-3xl font-bold md:text-4xl">
+            {heroTitle}
+          </h1>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">
             {heroDescription}
           </p>
-          <Link
-            href={heroButtonLink}
-            className="my-6 mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+          <Link href={heroButtonLink} className="btn-primary my-6">
             {heroButtonText}
           </Link>
         </section>
 
         {/* Three Service Cards Section */}
-        <section className="mt-2">
+        <section className="mt-6">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {services &&
               services.map((service, i) => (
@@ -101,7 +101,7 @@ export default function HomePage({ data, facebookPosts }) {
                   href={service.link}
                   key={i}
                   className="group block">
-                  <div className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-lg">
+                  <div className="card h-full">
                     {service.imageUrl && (
                       <Image
                         src={service.imageUrl}
@@ -109,14 +109,16 @@ export default function HomePage({ data, facebookPosts }) {
                         width={310}
                         height={288}
                         loading="lazy"
-                        className="h-72 w-full object-cover transition-transform group-hover:scale-105"
+                        className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     )}
-                    <div className="p-4">
-                      <h2 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                    <div className="p-5">
+                      <h2 className="text-xl font-semibold text-barn-800 transition-colors group-hover:text-forest-700">
                         {service.title}
                       </h2>
-                      <p>{service.description}</p>
+                      <p className="mt-2 text-gray-600">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
                 </Link>
@@ -125,7 +127,7 @@ export default function HomePage({ data, facebookPosts }) {
         </section>
 
         {/* About Section */}
-        <section className="mx-auto mt-10 max-w-4xl rounded-lg bg-blue-50 p-6">
+        <section className="section-band mx-auto mt-12 max-w-4xl p-8">
           {/* Title: Full Width */}
           <h3 className="mb-4 text-2xl font-semibold">
             {aboutTitle}
@@ -154,12 +156,12 @@ export default function HomePage({ data, facebookPosts }) {
           </div>
 
           {/* Quote: Full Width on Its Own Row */}
-          <blockquote className="border-l-4 border-blue-600 pl-4 italic text-gray-700">
+          <blockquote className="border-l-4 border-forest-600 pl-4 italic text-gray-700">
             {aboutQuote}
           </blockquote>
         </section>
 
-        <section className="mt-6">
+        <section className="mt-8">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {additionalServices &&
               additionalServices.map((service, i) => (
@@ -167,7 +169,7 @@ export default function HomePage({ data, facebookPosts }) {
                   href={service.link}
                   key={i}
                   className="group block">
-                  <div className="overflow-hidden rounded-lg border border-gray-200 transition-shadow hover:shadow-lg">
+                  <div className="card h-full">
                     {service.imageUrl && (
                       <Image
                         src={service.imageUrl}
@@ -175,14 +177,16 @@ export default function HomePage({ data, facebookPosts }) {
                         width={478}
                         height={288}
                         loading="lazy"
-                        className="h-72 w-full object-cover transition-transform group-hover:scale-105"
+                        className="h-72 w-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     )}
-                    <div className="p-4">
-                      <h3 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
+                    <div className="p-5">
+                      <h3 className="text-xl font-semibold text-barn-800 transition-colors group-hover:text-forest-700">
                         {service.title}
                       </h3>
-                      <p>{service.description}</p>
+                      <p className="mt-2 text-gray-600">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
                 </Link>
@@ -196,8 +200,8 @@ export default function HomePage({ data, facebookPosts }) {
         {/* Contact Form Section */}
         <div
           id="contact-form"
-          className="mx-auto mt-10 max-w-4xl rounded-lg border border-gray-200 p-6 shadow-sm">
-          <h3 className="mb-4 text-xl font-semibold text-gray-800">
+          className="mx-auto mt-12 max-w-4xl rounded-2xl border border-cream-300 bg-cream-100 p-8 shadow-sm dark:border-stone-800 dark:bg-stone-900">
+          <h3 className="mb-4 text-2xl font-semibold text-barn-800">
             {contactTitle}
           </h3>
           <p className="mb-6 text-gray-700">{contactDescription}</p>
@@ -231,7 +235,7 @@ export default function HomePage({ data, facebookPosts }) {
                       "Name can only contain letters, spaces, and basic punctuation"
                   }
                 })}
-                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
+                className="w-full rounded border border-gray-300 p-2 focus:border-forest-600 focus:outline-none"
               />
               {errors.name && (
                 <span className="text-sm text-red-600">
@@ -258,7 +262,7 @@ export default function HomePage({ data, facebookPosts }) {
                     message: "Please enter a valid email address"
                   }
                 })}
-                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
+                className="w-full rounded border border-gray-300 p-2 focus:border-forest-600 focus:outline-none"
               />
               {errors.email && (
                 <span className="text-sm text-red-600">
@@ -298,7 +302,7 @@ export default function HomePage({ data, facebookPosts }) {
                       "Please enter a valid phone number using digits, spaces, () or +"
                   }
                 })}
-                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
+                className="w-full rounded border border-gray-300 p-2 focus:border-forest-600 focus:outline-none"
               />
               {errors.phone && (
                 <span className="text-sm text-red-600">
@@ -439,7 +443,7 @@ export default function HomePage({ data, facebookPosts }) {
                       "Message cannot be empty or just whitespace"
                   }
                 })}
-                className="w-full rounded border border-gray-300 p-2 focus:border-blue-500 focus:outline-none"
+                className="w-full rounded border border-gray-300 p-2 focus:border-forest-600 focus:outline-none"
               />
               {errors.message && (
                 <span className="text-sm text-red-600">
@@ -451,7 +455,7 @@ export default function HomePage({ data, facebookPosts }) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+              className="btn-primary disabled:opacity-60">
               {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
@@ -468,27 +472,29 @@ export default function HomePage({ data, facebookPosts }) {
           )}
         </div>
 
-        <section className="mt-10 rounded-lg bg-gray-50 p-6">
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <section className="section-band mt-12 p-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
-              <h4 className="mb-4 text-2xl font-semibold">
+              <h4 className="mb-3 text-2xl font-semibold">
                 {workDirectlyTitle}
               </h4>
-              <p className="mx-auto max-w-4xl leading-relaxed text-gray-700">
+              <p className="leading-relaxed text-gray-600">
                 {workDirectlyDescription}
               </p>
             </div>
             <div>
-              <h4 className="mb-4 text-2xl font-semibold">
+              <h4 className="mb-3 text-2xl font-semibold">
                 {servingTitle}
               </h4>
-              <p className="text-gray-700">{servingDescription}</p>
+              <p className="leading-relaxed text-gray-600">
+                {servingDescription}
+              </p>
             </div>
           </div>
           <div className="flex justify-center">
             <Link
               href={servingButtonLink}
-              className=" mt-6 inline-block rounded bg-blue-600 px-6 py-3 text-white transition hover:bg-blue-700">
+              className="btn-primary mt-8">
               {servingButtonText}
             </Link>
           </div>

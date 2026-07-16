@@ -13,18 +13,48 @@ export default function Footer() {
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
-    <Container className="relative mt-10 border-t border-gray-100 dark:border-gray-800">
-      <div className="text-center text-sm">
+    <Container className="relative mt-10 border-t border-cream-300 dark:border-gray-800">
+      {/* Quick links */}
+      <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-6 text-sm font-medium">
+        <Link
+          href="/lessons"
+          className="text-gray-600 hover:text-forest-700 dark:text-gray-400">
+          Riding Lessons
+        </Link>
+        <Link
+          href="/boarding"
+          className="text-gray-600 hover:text-forest-700 dark:text-gray-400">
+          Horse Boarding
+        </Link>
+        <Link
+          href="/youth-camps"
+          className="text-gray-600 hover:text-forest-700 dark:text-gray-400">
+          Youth Camps
+        </Link>
+        <Link
+          href="/birthday-parties"
+          className="text-gray-600 hover:text-forest-700 dark:text-gray-400">
+          Birthday Parties
+        </Link>
+        <Link
+          href="/services"
+          className="text-gray-600 hover:text-forest-700 dark:text-gray-400">
+          Services
+        </Link>
+      </nav>
+
+      <div className="mt-4 text-center text-sm">
         {" "}
         <Link
           href={"https://www.facebook.com/CarmenNHurley"}
-          target="_blank">
+          target="_blank"
+          className="inline-flex items-center gap-2 text-forest-700 hover:underline">
           Like Us on Facebook{" "}
           <Image
             src={facebook}
             alt={"View on Our Facebook Page for more Photos"}
-            width={25}
-            height={25}
+            width={22}
+            height={22}
             className="centerImg"
           />{" "}
         </Link>
@@ -35,7 +65,7 @@ export default function Footer() {
         </div>
         <button
           onClick={handleOpenModal}
-          className="mb-1 text-blue-600 underline transition-colors hover:text-blue-800">
+          className="mb-1 text-forest-600 underline transition-colors hover:text-forest-800">
           Cancellation Policy
         </button>
         <address className="not-italic">
@@ -107,7 +137,7 @@ export default function Footer() {
               <div className="mt-6 flex justify-end">
                 <button
                   onClick={handleCloseModal}
-                  className="rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700">
+                  className="rounded bg-forest-600 px-4 py-2 text-white transition-colors hover:bg-forest-700">
                   Close
                 </button>
               </div>
